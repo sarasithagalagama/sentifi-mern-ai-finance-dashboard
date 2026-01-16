@@ -11,15 +11,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   
+  const [focusedInput, setFocusedInput] = useState<string | null>(null);
+
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  const getInputBorderColor = (fieldName: string) => {
+    if (focusedInput === fieldName) return 'var(--primary)';
+    if (fieldName === 'email' && email) return 'var(--primary)';
+    if (fieldName === 'password' && password) return 'var(--primary)';
+    return 'var(--border)';
+  };
 
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const token = await result.user.getIdToken();
       
-      // We send limited user info to backend to register if needed
       const googleUser = {
         name: result.user.displayName,
         email: result.user.email,
@@ -30,7 +38,6 @@ const Login = () => {
       navigate('/dashboard');
     } catch (error) {
        console.error("Google Login Error:", error);
-       // Error is already handled/toasted in context
     }
   };
 
@@ -50,54 +57,153 @@ const Login = () => {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div className="auth-card" style={{
+        background: '#1E1E1E',
+        borderRadius: '24px',
+        padding: '2rem',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        border: '1px solid #333',
+        width: '100%',
+        maxWidth: '420px',
+        position: 'relative',
+      }}>
+        {/* Glow Effects */}
+        <div style={{
+          position: 'absolute',
+          top: '-50%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '200px',
+          height: '200px',
+          background: 'var(--primary)',
+          opacity: '0.15',
+          filter: 'blur(80px)',
+          borderRadius: '50%',
+          pointerEvents: 'none'
+        }} />
+
+        <div style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative' }}>
           <div style={{ 
-             width: 56, height: 56, 
-             background: 'rgba(74, 222, 128, 0.1)', 
+             width: 64, height: 64, 
+             background: 'linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05))', 
              borderRadius: '50%', 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
              margin: '0 auto 1.5rem auto',
              color: 'var(--primary)',
-             border: '1px solid rgba(74, 222, 128, 0.2)'
+             border: '1px solid rgba(74, 222, 128, 0.3)',
+             boxShadow: '0 0 20px rgba(74, 222, 128, 0.2)'
           }}>
-            <LogIn size={28} />
+            <LogIn size={32} />
           </div>
-          <h1>Welcome Back</h1>
-          <p className="text-mute">Enter your credentials to access your finance dashboard</p>
+          <h1 style={{ 
+            fontSize: '1.75rem', 
+            fontWeight: 700, 
+            letterSpacing: '-0.025em',
+            marginBottom: '0.5rem',
+            background: 'linear-gradient(to right, #fff, #a3a3a3)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>Welcome Back</h1>
+          <p className="text-mute" style={{ fontSize: '0.95rem' }}>Enter your credentials to access your finance dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+        <form onSubmit={handleSubmit} className="auth-form" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="form-group" style={{ position: 'relative' }}>
+            <label htmlFor="email" style={{ 
+                position: 'absolute', 
+                left: '16px', 
+                top: email || focusedInput === 'email' ? '-10px' : '16px',
+                fontSize: email || focusedInput === 'email' ? '0.75rem' : '0.95rem',
+                color: focusedInput === 'email' ? 'var(--primary)' : 'var(--text-secondary)',
+                background: '#1E1E1E',
+                padding: '0 6px',
+                transition: 'all 0.2s',
+                pointerEvents: 'none',
+                zIndex: 10
+            }}>Email Address</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setFocusedInput('email')}
+              onBlur={() => setFocusedInput(null)}
               required
-              placeholder="name@example.com"
+              style={{
+                  width: '100%',
+                  padding: '16px',
+                  background: 'transparent',
+                  border: `1px solid ${getInputBorderColor('email')}`,
+                  borderRadius: '14px',
+                  color: 'white',
+                  fontSize: '1rem',
+                  outline: 'none',
+                  transition: 'all 0.2s'
+              }}
             />
           </div>
 
-          <div className="form-group">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <label htmlFor="password" style={{ marginBottom: 0 }}>Password</label>
-              <Link to="#" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
-                Forgot password?
-              </Link>
-            </div>
-            <input
+          <div className="form-group" style={{ position: 'relative' }}>
+            <label htmlFor="password" style={{ 
+                position: 'absolute', 
+                left: '16px', 
+                top: password || focusedInput === 'password' ? '-10px' : '16px',
+                fontSize: password || focusedInput === 'password' ? '0.75rem' : '0.95rem',
+                color: focusedInput === 'password' ? 'var(--primary)' : 'var(--text-secondary)',
+                background: '#1E1E1E',
+                padding: '0 6px',
+                transition: 'all 0.2s',
+                pointerEvents: 'none',
+                zIndex: 10
+            }}>Password</label>
+             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setFocusedInput('password')}
+              onBlur={() => setFocusedInput(null)}
               required
-              placeholder="••••••••"
+              style={{
+                  width: '100%',
+                  padding: '16px',
+                  background: 'transparent',
+                  border: `1px solid ${getInputBorderColor('password')}`,
+                  borderRadius: '14px',
+                  color: 'white',
+                  fontSize: '1rem',
+                  outline: 'none',
+                  transition: 'all 0.2s'
+              }}
             />
           </div>
+          
+           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}>
+              <Link to="#" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
+                Forgot password?
+              </Link>
+          </div>
 
-          <button type="submit" className="btn-submit" disabled={loading}>
+          <button 
+            type="submit" 
+            className="btn-submit" 
+            disabled={loading}
+             style={{
+                marginTop: '10px',
+                padding: '16px',
+                borderRadius: '14px',
+                fontSize: '1rem',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                background: 'var(--primary)',
+                color: '#000',
+                border: 'none',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.7 : 1,
+                boxShadow: '0 4px 12px rgba(74, 222, 128, 0.2)',
+                transition: 'all 0.2s'
+            }}
+          >
             {loading ? 'Logging in...' : 'Sign In'}
           </button>
         </form>
