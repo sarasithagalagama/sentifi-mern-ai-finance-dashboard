@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Sparkles } from 'lucide-react';
-
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebaseConfig";
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -18,23 +16,35 @@ const Register = () => {
   const { register, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const token = await result.user.getIdToken();
-      
-      const googleUser = {
-        name: result.user.displayName,
-        email: result.user.email,
-        googleId: result.user.uid
-      };
-      
-      await loginWithGoogle(token, googleUser);
-      navigate('/dashboard');
-    } catch (error) {
-       console.error("Google Login Error:", error);
+  // Native Google Login
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        setLoading(true);
+        // Get user info with the token
+        const userInfo = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        }).then(res => res.json());
+
+        const googleUser = {
+          name: userInfo.name,
+          email: userInfo.email,
+          googleId: userInfo.sub
+        };
+        
+        await loginWithGoogle(tokenResponse.access_token, googleUser);
+        navigate('/dashboard');
+      } catch (error) {
+         console.error("Google Login Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    onError: () => {
+      console.log('Google Login Failed');
+      setLoading(false);
     }
-  };
+  });
 
   useEffect(() => {
     // Force styles for autofill

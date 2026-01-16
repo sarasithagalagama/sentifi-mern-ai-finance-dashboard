@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogIn } from 'lucide-react';
-
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebaseConfig";
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,48 +14,35 @@ const Login = () => {
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.innerHTML = `
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover, 
-      input:-webkit-autofill:focus, 
-      input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px #1E1E1E inset !important;
-        -webkit-text-fill-color: white !important;
-        transition: background-color 5000s ease-in-out 0s;
+  // Native Google Login
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        setLoading(true);
+        // Get user info with the token
+        const userInfo = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        }).then(res => res.json());
+
+        const googleUser = {
+          name: userInfo.name,
+          email: userInfo.email,
+          googleId: userInfo.sub
+        };
+        
+        await loginWithGoogle(tokenResponse.access_token, googleUser);
+        navigate('/dashboard');
+      } catch (error) {
+         console.error("Google Login Error:", error);
+      } finally {
+        setLoading(false);
       }
-    `;
-    document.head.appendChild(style);
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
-
-  const getInputBorderColor = (fieldName: string) => {
-    if (focusedInput === fieldName) return 'var(--primary)';
-    if (fieldName === 'email' && email) return 'var(--primary)';
-    if (fieldName === 'password' && password) return 'var(--primary)';
-    return 'var(--border)';
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const token = await result.user.getIdToken();
-      
-      const googleUser = {
-        name: result.user.displayName,
-        email: result.user.email,
-        googleId: result.user.uid
-      };
-      
-      await loginWithGoogle(token, googleUser);
-      navigate('/dashboard');
-    } catch (error) {
-       console.error("Google Login Error:", error);
+    },
+    onError: () => {
+      console.log('Google Login Failed');
+      setLoading(false);
     }
-  };
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -196,7 +181,7 @@ const Login = () => {
           </div>
           
            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-6px' }}>
-              <Link to="#" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
+              <Link to="/forgot-password" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
                 Forgot password?
               </Link>
           </div>
