@@ -229,7 +229,6 @@ const Settings = () => {
                       <option value="JPY">JPY (¥)</option>
                       <option value="LKR">LKR (Rs)</option>
                   </select>
-                   </select>
                </div>
 
                {/* Custom AI Questions */}
