@@ -32,14 +32,15 @@ const Login = () => {
         
         await loginWithGoogle(tokenResponse.access_token, googleUser);
         navigate('/dashboard');
-      } catch (error) {
+      } catch (error: any) {
          console.error("Google Login Error:", error);
+         // Error toast is already shown by loginWithGoogle, no need to duplicate
       } finally {
         setLoading(false);
       }
     },
-    onError: () => {
-      console.log('Google Login Failed');
+    onError: (error) => {
+      console.log('Google Login Failed:', error);
       setLoading(false);
     }
   });
