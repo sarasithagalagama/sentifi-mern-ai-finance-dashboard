@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, ArrowUpRight, ArrowDownLeft, MoreHorizontal, Loader } from 'lucide-react';
 import { transactionApi } from '../api/transactionApi';
 import TransactionModal from '../components/TransactionModal';

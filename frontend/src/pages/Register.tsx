@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebaseConfig";
