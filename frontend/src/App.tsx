@@ -6,6 +6,8 @@ import Layout from './components/Layout';
 // Pages
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Budgets from './pages/Budgets';
@@ -15,9 +17,13 @@ import Import from './pages/Import';
 import Settings from './pages/Settings';
 
 import { ThemeProvider } from './context/ThemeContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
+  const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
+
   return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <AuthProvider>
       <ThemeProvider>
       <Router>
@@ -25,6 +31,8 @@ function App() {
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           
           {/* Protected Routes with Layout */}
           <Route path="/dashboard" element={
@@ -89,6 +97,7 @@ function App() {
       </Router>
       </ThemeProvider>
     </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 

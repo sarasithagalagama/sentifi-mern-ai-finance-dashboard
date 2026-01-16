@@ -34,5 +34,15 @@ export const authApi = {
   updateProfile: async (userData: any) => {
     const { data } = await axiosInstance.put('/api/auth/profile', userData);
     return data;
+  },
+
+  forgotPassword: async (email: string) => {
+    const { data } = await axiosInstance.post('/api/auth/forgotpassword', { email });
+    return data;
+  },
+
+  resetPassword: async (resetToken: string, password: string) => {
+    const { data } = await axiosInstance.put(`/api/auth/resetpassword/${resetToken}`, { password });
+    return data;
   }
 };
