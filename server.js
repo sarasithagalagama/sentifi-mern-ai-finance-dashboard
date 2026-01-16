@@ -24,14 +24,18 @@ const app = express();
 connectDB();
 
 // Initialize Cron Jobs
-initCronJobs();
+// Initialize Cron Jobs
+// Cron jobs are not suitable for serverless functions (Vercel)
+if (process.env.NODE_ENV !== "production") {
+  initCronJobs();
+}
 
 // Security Middleware
 app.use(
   helmet({
     contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
-  })
+  }),
 );
 
 // Rate Limiting
@@ -47,7 +51,7 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
-  })
+  }),
 );
 
 // Body Parser Middleware
@@ -65,7 +69,6 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/import", importRoutes);
 app.use("/api/investments", investmentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/reports", require("./backend/routes/reportRoutes"));
 app.use("/api/reports", require("./backend/routes/reportRoutes"));
 
 // Health Check Route

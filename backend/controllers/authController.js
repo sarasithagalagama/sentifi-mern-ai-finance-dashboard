@@ -12,7 +12,7 @@ const User = require("../models/User");
  */
 const register = async (req, res) => {
   const { user, accessToken, refreshToken } = await authService.registerUser(
-    req.body
+    req.body,
   );
 
   // Set HTTP-only cookies
@@ -45,7 +45,7 @@ const register = async (req, res) => {
  */
 const login = async (req, res) => {
   const { user, accessToken, refreshToken } = await authService.loginUser(
-    req.body
+    req.body,
   );
 
   // Set HTTP-only cookies
@@ -162,7 +162,7 @@ const updateProfile = async (req, res, next) => {
   try {
     const updatedUser = await authService.updateUserProfile(
       req.user._id,
-      req.body
+      req.body,
     );
     res.json({
       success: true,
@@ -224,18 +224,6 @@ const googleLogin = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  register,
-  login,
-  refresh,
-  logout,
-  getMe,
-  updateProfile,
-  googleLogin,
-  forgotPassword,
-  resetPassword,
-};
-
 const forgotPassword = async (req, res, next) => {
   try {
     const result = await authService.forgotPassword(req.body.email);
@@ -249,7 +237,7 @@ const resetPassword = async (req, res, next) => {
   try {
     const { user, accessToken, refreshToken } = await authService.resetPassword(
       req.params.resetToken,
-      req.body.password
+      req.body.password,
     );
 
     // Set HTTP-only cookies
@@ -276,4 +264,16 @@ const resetPassword = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  register,
+  login,
+  refresh,
+  logout,
+  getMe,
+  updateProfile,
+  googleLogin,
+  forgotPassword,
+  resetPassword,
 };
