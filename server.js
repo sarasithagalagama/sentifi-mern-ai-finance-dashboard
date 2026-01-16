@@ -83,8 +83,8 @@ if (process.env.NODE_ENV === "production") {
   // Use process.cwd() for Vercel environment
   app.use(express.static(path.join(process.cwd(), "frontend/dist")));
 
-  // Handle SPA routing for Express 5
-  app.get(["/", "/*"], (req, res) => {
+  // Handle SPA routing for Express 5 using RegEx
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.resolve(process.cwd(), "frontend", "dist", "index.html"));
   });
 } else {
