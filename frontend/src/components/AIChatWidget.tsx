@@ -31,13 +31,22 @@ const AIChatWidget = () => {
     scrollToBottom();
   }, [messages, isOpen]);
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  // Suggested questions
+  const suggestedQuestions = [
+    "How can I save more money?",
+    "Analyze my spending habits",
+    "What are my highest expenses?",
+    "Create a monthly budget plan"
+  ];
+
+  const handleSend = async (textOverride?: string) => {
+    const textToSend = typeof textOverride === 'string' ? textOverride : input;
+    if (!textToSend.trim()) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
       sender: 'user',
-      text: input,
+      text: textToSend,
       timestamp: new Date()
     };
 
@@ -46,7 +55,7 @@ const AIChatWidget = () => {
     setIsTyping(true);
 
     try {
-      const response = await aiApi.chat(input);
+      const response = await aiApi.chat(textToSend);
       
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
@@ -238,6 +247,36 @@ const AIChatWidget = () => {
             <div ref={messagesEndRef} />
           </div>
 
+          {/* Suggested Questions */}
+          <div style={{ 
+            padding: '0 16px 12px 16px',
+            display: 'flex', 
+            gap: '8px',
+            overflowX: 'auto',
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none',  // IE/Edge
+          }}>
+             {suggestedQuestions.map((q, i) => (
+               <button
+                 key={i}
+                 onClick={() => handleSend(q)}
+                 style={{
+                   whiteSpace: 'nowrap',
+                   padding: '8px 12px',
+                   borderRadius: '16px',
+                   border: '1px solid var(--primary)',
+                   background: 'rgba(74, 222, 128, 0.1)',
+                   color: 'var(--primary)',
+                   fontSize: '0.8rem',
+                   cursor: 'pointer',
+                   flexShrink: 0
+                 }}
+               >
+                 {q}
+               </button>
+             ))}
+          </div>
+
           {/* Input Area */}
           <div style={{
             padding: '16px',
@@ -264,7 +303,7 @@ const AIChatWidget = () => {
               }}
             />
             <button 
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={!input.trim() || isTyping}
               style={{
                 width: 48,
@@ -299,6 +338,10 @@ const AIChatWidget = () => {
         @keyframes bounce {
           0%, 80%, 100% { transform: scale(0); }
           40% { transform: scale(1); }
+        }
+        /* Hide scrollbar for suggestions */
+        div::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </>
