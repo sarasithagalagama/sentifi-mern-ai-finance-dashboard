@@ -97,13 +97,13 @@ const Register = () => {
       <div className="auth-card" style={{
         background: '#1E1E1E',
         borderRadius: '24px',
-        padding: '2.5rem',
+        padding: '2rem',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         border: '1px solid #333',
         width: '100%',
         maxWidth: '420px',
         position: 'relative',
-        overflow: 'hidden'
+        // removed overflow: hidden to prevent clipping
       }}>
         {/* Glow Effects */}
         <div style={{

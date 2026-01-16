@@ -194,14 +194,14 @@ input:focus {
 }
 
 /* Auth Specifics */
-.auth-page {
   background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto; /* Allow independent scrolling */
+  padding: 2rem 1rem; /* Add padding to prevent edge touching */
 }
 
 /* Ambient Background Glow */
@@ -223,7 +223,7 @@ input:focus {
   background: rgba(30, 30, 30, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 3rem;
+  padding: 2rem; /* Reduced from 3rem */
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
