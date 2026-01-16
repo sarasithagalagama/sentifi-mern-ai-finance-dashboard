@@ -77,15 +77,14 @@ const Login = () => {
     <div className="auth-page">
       <div className="auth-card" style={{
         background: '#1E1E1E',
-        borderRadius: '24px',
-        padding: '2rem',
+        borderRadius: '20px',
+        padding: '1.5rem',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         border: '1px solid #333',
         width: '100%',
-        maxWidth: '420px',
+        maxWidth: '400px',
         position: 'relative',
       }}>
-        {/* Glow Effects */}
         <div style={{
           position: 'absolute',
           top: '-50%',
@@ -100,37 +99,37 @@ const Login = () => {
           pointerEvents: 'none'
         }} />
 
-        <div style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1.25rem', position: 'relative' }}>
           <div style={{ 
-             width: 64, height: 64, 
+             width: 48, height: 48, 
              background: 'linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05))', 
              borderRadius: '50%', 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
-             margin: '0 auto 1.5rem auto',
+             margin: '0 auto 1rem auto',
              color: 'var(--primary)',
              border: '1px solid rgba(74, 222, 128, 0.3)',
              boxShadow: '0 0 20px rgba(74, 222, 128, 0.2)'
           }}>
-            <LogIn size={32} />
+            <LogIn size={24} />
           </div>
           <h1 style={{ 
-            fontSize: '1.75rem', 
+            fontSize: '1.5rem', 
             fontWeight: 700, 
             letterSpacing: '-0.025em',
-            marginBottom: '0.5rem',
+            marginBottom: '0.25rem',
             background: 'linear-gradient(to right, #fff, #a3a3a3)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>Welcome Back</h1>
-          <p className="text-mute" style={{ fontSize: '0.95rem' }}>Enter your credentials to access your finance dashboard</p>
+          <p className="text-mute" style={{ fontSize: '0.875rem' }}>Enter your credentials to access your finance dashboard</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="auth-form" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleSubmit} className="auth-form" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div className="form-group" style={{ position: 'relative' }}>
             <label htmlFor="email" style={{ 
                 position: 'absolute', 
                 left: '16px', 
-                top: email || focusedInput === 'email' ? '-10px' : '16px',
+                top: email || focusedInput === 'email' ? '-10px' : '14px',
                 fontSize: email || focusedInput === 'email' ? '0.75rem' : '0.95rem',
                 color: focusedInput === 'email' ? 'var(--primary)' : 'var(--text-secondary)',
                 background: '#1E1E1E',
@@ -149,12 +148,12 @@ const Login = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('email')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
@@ -165,7 +164,7 @@ const Login = () => {
             <label htmlFor="password" style={{ 
                 position: 'absolute', 
                 left: '16px', 
-                top: password || focusedInput === 'password' ? '-10px' : '16px',
+                top: password || focusedInput === 'password' ? '-10px' : '14px',
                 fontSize: password || focusedInput === 'password' ? '0.75rem' : '0.95rem',
                 color: focusedInput === 'password' ? 'var(--primary)' : 'var(--text-secondary)',
                 background: '#1E1E1E',
@@ -184,19 +183,19 @@ const Login = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('password')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
             />
           </div>
           
-           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-8px' }}>
+           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-6px' }}>
               <Link to="#" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
                 Forgot password?
               </Link>
@@ -207,10 +206,10 @@ const Login = () => {
             className="btn-submit" 
             disabled={loading}
              style={{
-                marginTop: '10px',
-                padding: '16px',
-                borderRadius: '14px',
-                fontSize: '1rem',
+                marginTop: '6px',
+                padding: '14px',
+                borderRadius: '12px',
+                fontSize: '0.95rem',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
                 background: 'var(--primary)',
@@ -226,7 +225,7 @@ const Login = () => {
           </button>
         </form>
 
-        <div style={{ display: 'flex', alignItems: 'center', margin: '1.5rem 0', opacity: 0.8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', margin: '1rem 0', opacity: 0.8 }}>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
           <span style={{ padding: '0 10px', color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 500 }}>or continue with</span>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
@@ -238,12 +237,12 @@ const Login = () => {
           type="button"
           style={{
             width: '100%',
-            padding: '14px',
+            padding: '12px',
             background: 'white',
             border: 'none',
-            borderRadius: '14px',
+            borderRadius: '12px',
             color: '#111',
-            fontSize: '0.95rem',
+            fontSize: '0.9rem',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
@@ -271,7 +270,7 @@ const Login = () => {
           Sign in with Google
         </button>
 
-        <p className="auth-footer">
+        <p className="auth-footer" style={{ marginTop: '1.25rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
           Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>Sign up</Link>
         </p>
       </div>

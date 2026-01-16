@@ -96,14 +96,13 @@ const Register = () => {
     <div className="auth-page">
       <div className="auth-card" style={{
         background: '#1E1E1E',
-        borderRadius: '24px',
-        padding: '2rem',
+        borderRadius: '20px',
+        padding: '1.5rem',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
         border: '1px solid #333',
         width: '100%',
-        maxWidth: '420px',
+        maxWidth: '400px',
         position: 'relative',
-        // removed overflow: hidden to prevent clipping
       }}>
         {/* Glow Effects */}
         <div style={{
@@ -120,29 +119,29 @@ const Register = () => {
           pointerEvents: 'none'
         }} />
 
-        <div style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1.25rem', position: 'relative' }}>
           <div style={{ 
-             width: 64, height: 64, 
+             width: 48, height: 48, 
              background: 'linear-gradient(135deg, rgba(74, 222, 128, 0.2), rgba(74, 222, 128, 0.05))', 
              borderRadius: '50%', 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
-             margin: '0 auto 1.5rem auto',
+             margin: '0 auto 1rem auto',
              color: 'var(--primary)',
              border: '1px solid rgba(74, 222, 128, 0.3)',
              boxShadow: '0 0 20px rgba(74, 222, 128, 0.2)'
           }}>
-            <Sparkles size={32} />
+            <Sparkles size={24} />
           </div>
           <h1 style={{ 
-            fontSize: '1.75rem', 
+            fontSize: '1.5rem', 
             fontWeight: 700, 
             letterSpacing: '-0.025em',
-            marginBottom: '0.5rem',
+            marginBottom: '0.25rem',
             background: 'linear-gradient(to right, #fff, #a3a3a3)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>Create Account</h1>
-          <p className="text-mute" style={{ fontSize: '0.95rem' }}>Start your financial journey today</p>
+          <p className="text-mute" style={{ fontSize: '0.875rem' }}>Start your financial journey today</p>
         </div>
 
         {error && (
@@ -164,7 +163,7 @@ const Register = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleSubmit} className="auth-form" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           
           <div className="form-group" style={{ position: 'relative' }}>
             <label htmlFor="name" style={{ 
@@ -189,12 +188,12 @@ const Register = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('name')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
@@ -224,12 +223,12 @@ const Register = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('email')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
@@ -240,7 +239,7 @@ const Register = () => {
             <label htmlFor="password" style={{ 
                 position: 'absolute', 
                 left: '16px', 
-                top: password || focusedInput === 'password' ? '-10px' : '16px',
+                top: password || focusedInput === 'password' ? '-10px' : '14px',
                 fontSize: password || focusedInput === 'password' ? '0.75rem' : '0.95rem',
                 color: focusedInput === 'password' ? 'var(--primary)' : 'var(--text-secondary)',
                 background: '#1E1E1E',
@@ -259,12 +258,12 @@ const Register = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('password')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
@@ -275,7 +274,7 @@ const Register = () => {
             <label htmlFor="confirmPassword" style={{ 
                 position: 'absolute', 
                 left: '16px', 
-                top: confirmPassword || focusedInput === 'confirmPassword' ? '-10px' : '16px',
+                top: confirmPassword || focusedInput === 'confirmPassword' ? '-10px' : '14px',
                 fontSize: confirmPassword || focusedInput === 'confirmPassword' ? '0.75rem' : '0.95rem',
                 color: focusedInput === 'confirmPassword' ? 'var(--primary)' : 'var(--text-secondary)',
                 background: '#1E1E1E',
@@ -294,12 +293,12 @@ const Register = () => {
               required
               style={{
                   width: '100%',
-                  padding: '16px',
+                  padding: '14px',
                   background: 'transparent',
                   border: `1px solid ${getInputBorderColor('confirmPassword')}`,
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   color: 'white',
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   outline: 'none',
                   transition: 'all 0.2s'
               }}
@@ -311,10 +310,10 @@ const Register = () => {
             className="btn-submit" 
             disabled={loading}
             style={{
-                marginTop: '10px',
-                padding: '16px',
-                borderRadius: '14px',
-                fontSize: '1rem',
+                marginTop: '6px',
+                padding: '14px',
+                borderRadius: '12px',
+                fontSize: '0.95rem',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
                 background: 'var(--primary)',
@@ -330,7 +329,7 @@ const Register = () => {
           </button>
         </form>
 
-        <div style={{ display: 'flex', alignItems: 'center', margin: '1.5rem 0', opacity: 0.8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', margin: '1rem 0', opacity: 0.8 }}>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
           <span style={{ padding: '0 10px', color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 500 }}>or continue with</span>
           <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
@@ -342,12 +341,12 @@ const Register = () => {
           disabled={loading}
           style={{
             width: '100%',
-            padding: '14px',
+            padding: '12px',
             background: 'white',
             border: 'none',
-            borderRadius: '14px',
+            borderRadius: '12px',
             color: '#111',
-            fontSize: '0.95rem',
+            fontSize: '0.9rem',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
@@ -375,7 +374,7 @@ const Register = () => {
           Sign up with Google
         </button>
 
-        <p className="auth-footer" style={{ marginTop: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+        <p className="auth-footer" style={{ marginTop: '1.25rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
           Already have an account? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none', marginLeft: '6px' }}>Sign in</Link>
         </p>
       </div>
