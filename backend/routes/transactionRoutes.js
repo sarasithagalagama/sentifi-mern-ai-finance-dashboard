@@ -10,6 +10,9 @@ router.use(protect);
 // Analytics route (must be before /:id to avoid conflict)
 router.get("/analytics", transactionController.getAnalytics);
 
+// Bulk operations
+router.post("/bulk-delete", transactionController.bulkDeleteTransactions);
+
 // CRUD routes
 router
   .route("/")

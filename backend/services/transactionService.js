@@ -12,7 +12,7 @@ const createTransaction = async (userId, transactionData) => {
   const convertedAmount = await currencyService.convertCurrency(
     amount,
     currency,
-    "USD"
+    "USD",
   );
 
   const transaction = await Transaction.create({
@@ -112,7 +112,7 @@ const updateTransaction = async (transactionId, userId, updateData) => {
     transaction.convertedAmount = await currencyService.convertCurrency(
       transaction.amount,
       transaction.currency,
-      "USD"
+      "USD",
     );
   }
 
@@ -126,14 +126,14 @@ const updateTransaction = async (transactionId, userId, updateData) => {
       await updateBudgetSpending(
         userId,
         transaction.category,
-        transaction.date
+        transaction.date,
       );
     } else {
       // Amount changed - update current budget
       await updateBudgetSpending(
         userId,
         transaction.category,
-        transaction.date
+        transaction.date,
       );
     }
   }
@@ -255,8 +255,23 @@ const updateBudgetSpending = async (userId, category, date) => {
   await Budget.findOneAndUpdate(
     { user: userId, category, month: monthStart },
     { currentSpending },
-    { upsert: false }
+    { upsert: false },
   );
+};
+
+/**
+ * Bulk delete transactions
+ */
+const bulkDeleteTransactions = async (transactionIds, userId) => {
+  const result = await Transaction.deleteMany({
+    _id: { $in: transactionIds },
+    user: userId,
+  });
+
+  // Note: Budget updates are not triggered for bulk deletes for performance
+  // Users should manually review budgets after bulk operations
+
+  return result;
 };
 
 module.exports = {
@@ -265,5 +280,6 @@ module.exports = {
   getTransactionById,
   updateTransaction,
   deleteTransaction,
+  bulkDeleteTransactions,
   getAnalytics,
 };
