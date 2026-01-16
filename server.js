@@ -27,7 +27,12 @@ connectDB();
 initCronJobs();
 
 // Security Middleware
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -75,10 +80,11 @@ app.get("/api/health", (req, res) => {
 // Serve frontend
 const path = require("path");
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/dist")));
+  // Use process.cwd() for Vercel environment
+  app.use(express.static(path.join(process.cwd(), "frontend/dist")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.resolve(process.cwd(), "frontend", "dist", "index.html"));
   });
 } else {
   app.get("/", (req, res) => {
