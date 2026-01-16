@@ -6,11 +6,11 @@
 }
 
 :root {
-  /* Dark Theme Palette (Yanz Inspired) */
-  --bg-primary: #121212;      /* Main background - Very dark */
-  --bg-secondary: #1e1e1e;    /* Card background */
-  --bg-tertiary: #2d2d2d;     /* Hover states / Inputs */
-  --card-accent: #18181b;     /* Darker card background */
+  /* Dark Theme Palette (Defaults - Overridden by React Context) */
+  --bg-primary: #121212;      
+  --bg-secondary: #1e1e1e;    
+  --bg-tertiary: #2d2d2d;     
+  --card-accent: #18181b;     
   --input-bg: rgba(255, 255, 255, 0.03);
   
   --bg-tertiary: #2d2d2d;     /* Hover states / Inputs */
@@ -20,7 +20,7 @@
   --modal-overlay: rgba(0, 0, 0, 0.7);
   --modal-bg: #1e1e1e;
   
-  --primary: #4ade80;         /* Vibrant Green */
+  --primary: #4ade80;         
   --primary-dark: #22c55e;
   --primary-light: #86efac;
 
@@ -30,7 +30,7 @@
 
   --accent-purple: #a855f7;   /* For Savings/Goals */
   --accent-blue: #3b82f6;     /* For Balance/Charts */
-  --accent-orange: #f97316;   /* For Warnings */
+  --accent-orange: #F74304;   /* Vibrant Orange */
 
   --danger: #ef4444;
   --success: #22c55e;
@@ -176,14 +176,14 @@ input::placeholder, textarea::placeholder {
 }
 
 /* Fix for Chrome Autofill turning inputs white */
+/* Fix for Chrome Autofill - using transition hack to preserve transparency */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px #222 inset !important; /* darker solid background for autofill */
-    -webkit-text-fill-color: white !important;
-    caret-color: white;
-    border-color: rgba(255, 255, 255, 0.2);
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
 }
 
 input:focus {

@@ -83,25 +83,20 @@ const Investments = () => {
             </div>
          </div>
 
-         {/* Performers (Mocked for now as we need history to calc) */}
-         <div className="card">
-            <h3>Top Performers</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                 <span>NVDA</span>
-                 <span style={{ color: 'var(--success)' }}>+154%</span>
-               </div>
-               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                 <span>BTC</span>
-                 <span style={{ color: 'var(--success)' }}>+89%</span>
-               </div>
-               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                 <span>AAPL</span>
-                 <span style={{ color: 'var(--success)' }}>+22%</span>
-               </div>
-            </div>
-         </div>
-       </div>
+         {/* Top Assets (Replacing Performers with Top 3 by Value) */}
+          <div className="card">
+             <h3>Top Assets</h3>
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+                {portfolioData.sort((a,b) => b.value - a.value).slice(0, 3).map((item) => (
+                    <div key={item._id || item.name} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>{item.name}</span>
+                        <span style={{ color: 'var(--success)', fontWeight: 600 }}>${item.value.toLocaleString()}</span>
+                    </div>
+                ))}
+                {portfolioData.length === 0 && <span className="text-mute">No assets found</span>}
+             </div>
+          </div>
+        </div>
 
        {/* Recent Activity */}
        <div className="card">

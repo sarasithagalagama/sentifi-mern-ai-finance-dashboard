@@ -134,6 +134,26 @@ const getDashboardData = async (userId) => {
     })
     .sort((a, b) => a.daysLeft - b.daysLeft);
 
+  // 8. Annual Trends (Last 12 Months)
+  const annualData = [];
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date();
+    d.setMonth(d.getMonth() - i);
+    const mStart = new Date(d.getFullYear(), d.getMonth(), 1);
+    const mEnd = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+
+    const monthStats = await Transaction.aggregate([
+      { $match: { user: userId, date: { $gte: mStart, $lte: mEnd } } },
+      { $group: { _id: "$type", total: { $sum: "$amount" } } },
+    ]);
+
+    const inc = monthStats.find((s) => s._id === "income")?.total || 0;
+    const exp = monthStats.find((s) => s._id === "expense")?.total || 0;
+
+    const monthName = d.toLocaleString("default", { month: "short" });
+    annualData.push({ name: monthName, income: inc, expense: exp });
+  }
+
   return {
     overview: {
       totalBalance: cashBalance,
@@ -144,6 +164,7 @@ const getDashboardData = async (userId) => {
     charts: {
       expenseBreakdown: expenseChartData,
       incomeVsExpense: incomeVsExpenseData,
+      annualData, // Added here
     },
     goals,
     upcomingBills,

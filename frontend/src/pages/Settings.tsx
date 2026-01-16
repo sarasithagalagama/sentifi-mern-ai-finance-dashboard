@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { authApi } from '../api/authApi';
-import { User, Lock, Moon, Sun, Save, Loader } from 'lucide-react';
+import { User, Lock, Moon, Sun, Save, Loader, Check } from 'lucide-react';
 
 const Settings = () => {
   const { user, setUser } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, preset, setPreset } = useTheme();
   
   const [formData, setFormData] = useState({
     name: '',
@@ -107,7 +107,7 @@ const Settings = () => {
               </div>
            </div>
            
-           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--card-accent)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'var(--card-accent)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', marginBottom: '1rem' }}>
                <span>Interface Theme</span>
                <button 
                  onClick={toggleTheme}
@@ -123,6 +123,36 @@ const Settings = () => {
                >
                    {theme === 'dark' ? <><Moon size={16} /> Dark Mode</> : <><Sun size={16} /> Light Mode</>}
                </button>
+           </div>
+
+           <div style={{ padding: '1rem', background: 'var(--card-accent)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+             <div style={{ marginBottom: '1rem', fontSize: '0.95rem' }}>Color Palette</div>
+             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <PaletteOption 
+                  label="Emerald" 
+                  color="#4ade80" 
+                  active={preset === 'emerald'} 
+                  onClick={() => setPreset('emerald')} 
+                />
+                <PaletteOption 
+                  label="Neon" 
+                  color="#DAFF01" 
+                  active={preset === 'neon'} 
+                  onClick={() => setPreset('neon')} 
+                />
+                <PaletteOption 
+                  label="Amethyst" 
+                  color="#d8b4fe" 
+                  active={preset === 'amethyst'} 
+                  onClick={() => setPreset('amethyst')} 
+                />
+                <PaletteOption 
+                  label="Oceanic" 
+                  color="#38bdf8" 
+                  active={preset === 'oceanic'} 
+                  onClick={() => setPreset('oceanic')} 
+                />
+             </div>
            </div>
         </div>
 
@@ -264,5 +294,27 @@ const Settings = () => {
     </div>
   );
 };
+
+const PaletteOption = ({ label, color, active, onClick }: { label: string, color: string, active: boolean, onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      padding: '0.5rem 1rem',
+      background: active ? 'var(--bg-tertiary)' : 'transparent',
+      border: `1px solid ${active ? 'var(--primary)' : 'var(--border)'}`,
+      borderRadius: 'var(--radius-full)',
+      cursor: 'pointer',
+      color: 'var(--text-primary)',
+      transition: 'all 0.2s'
+    }}
+  >
+    <div style={{ width: 16, height: 16, borderRadius: '50%', background: color }} />
+    <span>{label}</span>
+    {active && <Check size={14} style={{ color: 'var(--primary)' }} />}
+  </button>
+);
 
 export default Settings;

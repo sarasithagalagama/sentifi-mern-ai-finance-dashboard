@@ -53,31 +53,19 @@ const Import = () => {
          </div>
 
          {/* Recent Imports */}
-         <div className="card">
-           <h3>Recent Imports</h3>
-           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-             {[
-               { name: 'march_expenses.csv', date: 'Just now', size: '12 KB', status: 'Success' },
-               { name: 'credit_card_feb.xlsx', date: '2 days ago', size: '45 KB', status: 'Success' },
-             ].map((file, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <div style={{ padding: 8, background: 'var(--bg-tertiary)', borderRadius: 8 }}>
-                      <FileText size={16} />
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: 500 }}>{file.name}</div>
-                      <div className="text-small text-mute">{file.date} • {file.size}</div>
-                    </div>
-                  </div>
-                  <CheckCircle size={16} color="var(--success)" />
-                </div>
-             ))}
-           </div>
-         </div>
+          <div className="card">
+            <h3>Recent Imports</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+              {/* Mock data removed. Future: Fetch from backend */}
+               <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--text-secondary)' }}>
+                 No recent file imports
+               </div>
+            </div>
+          </div>
       </div>
     </div>
   );
 };
 
 export default Import;
+

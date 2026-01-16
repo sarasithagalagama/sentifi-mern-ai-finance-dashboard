@@ -56,11 +56,9 @@ const Dashboard = () => {
               <h3>Quick Financial Overview</h3>
               <p className="text-mute text-small">Stay on Top of Your Finances</p>
             </div>
-            <button className="badge" style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)', border: 'none' }}>
-              Sort by <span style={{ color: 'var(--primary)' }}>This Month ▼</span>
-            </button>
-          </div>
 
+          </div>
+          
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--spacing-md)' }}>
             {/* Total Balance */}
             <div style={{ 

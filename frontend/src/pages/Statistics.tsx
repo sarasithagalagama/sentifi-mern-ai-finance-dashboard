@@ -1,31 +1,53 @@
+import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, CartesianGrid } from 'recharts';
+import { dashboardApi } from '../api/dashboardApi';
+import { Loader } from 'lucide-react';
 
 const Statistics = () => {
-  const annualData = [
-    { name: 'Jan', income: 4000, expense: 2400 },
-    { name: 'Feb', income: 3000, expense: 1398 },
-    { name: 'Mar', income: 2000, expense: 9800 },
-    { name: 'Apr', income: 2780, expense: 3908 },
-    { name: 'May', income: 1890, expense: 4800 },
-    { name: 'Jun', income: 2390, expense: 3800 },
-    { name: 'Jul', income: 3490, expense: 4300 },
-  ];
+  const [data, setData] = useState<{
+      annualData: any[];
+      overview: any;
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const loadData = async () => {
+          try {
+              const res = await dashboardApi.getDashboardData();
+              // res.data contains { overview, charts: { annualData, ... } }
+              setData({
+                  annualData: res.charts.annualData,
+                  overview: res.overview
+              });
+          } catch (e) {
+              console.error(e);
+          } finally {
+              setLoading(false);
+          }
+      }
+      loadData();
+  }, []);
+
+  if (loading) return <div style={{display:'flex', justifyContent:'center', padding:'3rem'}}><Loader className="animate-spin"/></div>;
+  if (!data) return <div>Failed to load data</div>;
+
+  const { annualData, overview } = data;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
       {/* Header Stats */}
       <div className="overview-cards" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="card">
-          <span className="text-mute">Average Daily Spend</span>
-          <h2>$124.50</h2>
+          <span className="text-mute">Total Balance</span>
+          <h2>${overview.totalBalance.toLocaleString()}</h2>
         </div>
         <div className="card">
-          <span className="text-mute">Highest Spend Category</span>
-          <h2>Rent & Utilities</h2>
+          <span className="text-mute">Net Worth</span>
+          <h2>${overview.netWorth.toLocaleString()}</h2>
         </div>
         <div className="card">
-          <span className="text-mute">Projected Savings</span>
-          <h2 style={{ color: 'var(--primary)' }}>$2,450</h2>
+          <span className="text-mute">Projected Savings (Goal %)</span>
+          <h2 style={{ color: 'var(--primary)' }}>{overview.savingsPercentage}%</h2>
         </div>
       </div>
 
