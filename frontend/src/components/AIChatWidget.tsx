@@ -251,23 +251,26 @@ const AIChatWidget = () => {
           <div style={{ 
             padding: '0 16px 12px 16px',
             display: 'flex', 
-            flexWrap: 'wrap',
             gap: '8px',
+            overflowX: 'auto',
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none',  // IE/Edge
           }}>
              {suggestedQuestions.map((q, i) => (
                <button
                  key={i}
                  onClick={() => handleSend(q)}
                  style={{
+                   whiteSpace: 'nowrap',
                    padding: '8px 12px',
-                   borderRadius: '12px',
+                   borderRadius: '16px',
                    border: '1px solid var(--border)',
                    background: 'var(--bg-tertiary)',
                    color: 'var(--text-primary)',
                    fontSize: '0.8rem',
                    cursor: 'pointer',
+                   flexShrink: 0,
                    transition: 'all 0.2s',
-                   textAlign: 'left'
                  }}
                  onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = 'var(--primary)';
