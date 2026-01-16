@@ -48,9 +48,9 @@ const Investments = () => {
              <button 
                 onClick={() => setIsModalOpen(true)}
                 className="btn-primary" 
-                style={{ position: 'absolute', top: 16, right: 16, padding: '8px 12px', fontSize: '0.9rem' }}
+                style={{ position: 'absolute', top: 16, right: 16, padding: '8px 12px', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}
              >
-                <Plus size={16} style={{marginRight: 4}} /> Add Asset
+                <Plus size={16} style={{marginRight: 6}} /> Add Asset
              </button>
 
             <div>
