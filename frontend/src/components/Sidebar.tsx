@@ -37,7 +37,8 @@ const Sidebar = () => {
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
-        gap: 'var(--spacing-sm)', 
+        gap: 'var(--spacing-md)', 
+        paddingLeft: 16,
         marginBottom: 'var(--spacing-2xl)',
         cursor: 'pointer'
       }} onClick={() => navigate('/')}>
