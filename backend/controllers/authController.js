@@ -232,4 +232,48 @@ module.exports = {
   getMe,
   updateProfile,
   googleLogin,
+  forgotPassword,
+  resetPassword,
+};
+
+const forgotPassword = async (req, res, next) => {
+  try {
+    const result = await authService.forgotPassword(req.body.email);
+    res.json({ success: true, data: result.message });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const resetPassword = async (req, res, next) => {
+  try {
+    const { user, accessToken, refreshToken } = await authService.resetPassword(
+      req.params.resetToken,
+      req.body.password
+    );
+
+    // Set HTTP-only cookies
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 15 * 60 * 1000,
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json({
+      success: true,
+      message: "Password updated successfully",
+      user,
+      accessToken,
+    });
+  } catch (error) {
+    next(error);
+  }
 };

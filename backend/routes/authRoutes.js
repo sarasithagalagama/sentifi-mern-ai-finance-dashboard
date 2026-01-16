@@ -9,6 +9,8 @@ router.post("/register", validateRegister, authController.register);
 router.post("/login", validateLogin, authController.login);
 router.post("/refresh", authController.refresh);
 router.post("/google", authController.googleLogin);
+router.post("/forgotpassword", authController.forgotPassword);
+router.put("/resetpassword/:resetToken", authController.resetPassword);
 
 // Protected routes
 router.post("/logout", protect, authController.logout);

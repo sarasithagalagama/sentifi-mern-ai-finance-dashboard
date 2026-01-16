@@ -167,10 +167,100 @@ const loginOrRegisterGoogleUser = async ({ email, name, googleId }) => {
   };
 };
 
+const forgotPassword = async (email) => {
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw new Error("There is no user with that email");
+  }
+
+  // Get reset token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  // Create reset url
+  const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+  const resetUrl = `${clientUrl}/reset-password/${resetToken}`;
+
+  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
+  const html = `
+    <h1>Password Reset Request</h1>
+    <p>You requested a password reset. Please click the link below to reset your password:</p>
+    <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+    <p>This link will expire in 10 minutes.</p>
+  `;
+
+  try {
+    const sendEmail = require("../utils/sendEmail");
+    await sendEmail({
+      email: user.email,
+      subject: "Password Reset Token",
+      message,
+      html,
+    });
+
+    return { message: "Email sent" };
+  } catch (err) {
+    console.error(err);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({ validateBeforeSave: false });
+
+    throw new Error("Email could not be sent");
+  }
+};
+
+const resetPassword = async (resetToken, newPassword) => {
+  const crypto = require("crypto");
+
+  // Get hashed token
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    throw new Error("Invalid token");
+  }
+
+  // Set new password
+  user.password = newPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+
+  // Generate new tokens
+  const accessToken = generateAccessToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
+
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  return {
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+    accessToken,
+    refreshToken,
+  };
+};
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   updateUserProfile,
   loginOrRegisterGoogleUser,
+  forgotPassword,
+  resetPassword,
 };
