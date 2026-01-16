@@ -58,6 +58,13 @@ const Login = () => {
     }
   };
 
+  const getInputBorderColor = (fieldName: string) => {
+    if (focusedInput === fieldName) return 'var(--primary)';
+    if (fieldName === 'email' && email) return 'var(--primary)';
+    if (fieldName === 'password' && password) return 'var(--primary)';
+    return 'var(--border)';
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card" style={{
