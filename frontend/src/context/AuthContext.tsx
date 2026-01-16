@@ -17,6 +17,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
+  loginWithGoogle: (token: string, user: any) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -77,6 +78,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  const loginWithGoogle = async (token: string, googleUser: any) => {
+    try {
+      const response = await authApi.loginWithGoogle(token, googleUser);
+      localStorage.setItem('accessToken', response.accessToken);
+      setUser(response.user);
+      toast.success('Google login successful!');
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Google login failed');
+      throw error;
+    }
+  };
+
   const logout = async () => {
     try {
       await authApi.logout();
@@ -94,6 +107,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     isAuthenticated: !!user,
     login,
     register,
+    loginWithGoogle,
     logout,
   };
 

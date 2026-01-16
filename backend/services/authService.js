@@ -126,9 +126,51 @@ const updateUserProfile = async (userId, updateData) => {
   };
 };
 
+const loginOrRegisterGoogleUser = async ({ email, name, googleId }) => {
+  // Check if user exists
+  let user = await User.findOne({ email });
+
+  if (user) {
+    // If user exists but doesn't have googleId (was created via email/pass), link it
+    if (!user.googleId) {
+      user.googleId = googleId;
+      await user.save();
+    }
+  } else {
+    // Register new user
+    user = await User.create({
+      name,
+      email,
+      googleId,
+    });
+  }
+
+  // Generate tokens
+  const accessToken = generateAccessToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
+
+  // Save refresh token
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  return {
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      defaultCurrency: user.defaultCurrency,
+      customQuestions: user.customQuestions,
+    },
+    accessToken,
+    refreshToken,
+  };
+};
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   updateUserProfile,
+  loginOrRegisterGoogleUser,
 };

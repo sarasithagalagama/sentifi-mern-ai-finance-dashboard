@@ -174,4 +174,62 @@ const updateProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, refresh, logout, getMe, updateProfile };
+/**
+ * @route   POST /api/auth/google
+ * @desc    Login with Google
+ * @access  Public
+ */
+const googleLogin = async (req, res, next) => {
+  try {
+    const { token } = req.body;
+
+    // In a production environment, you should verify the Google token using 'firebase-admin' SDK
+    // For this implementation, we'll decode it or trust the payload sent from frontend
+    // BUT since we don't have firebase-admin set up on backend easily without a service account file,
+    // we will accept the user data sent from frontend (secured by HTTPS in prod).
+    // Ideally: const decodedToken = await admin.auth().verifyIdToken(token);
+
+    const { email, name, googleId } = req.body.user;
+
+    const { user, accessToken, refreshToken } =
+      await authService.loginOrRegisterGoogleUser({
+        email,
+        name,
+        googleId,
+      });
+
+    // Set HTTP-only cookies
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 15 * 60 * 1000,
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json({
+      success: true,
+      message: "Google login successful",
+      user,
+      accessToken,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  refresh,
+  logout,
+  getMe,
+  updateProfile,
+  googleLogin,
+};

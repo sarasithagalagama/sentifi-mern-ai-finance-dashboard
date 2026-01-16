@@ -11,6 +11,11 @@ export const authApi = {
     return data;
   },
 
+  loginWithGoogle: async (token: string, user: any) => {
+    const { data } = await axiosInstance.post('/api/auth/google', { token, user });
+    return data;
+  },
+
   logout: async () => {
     const { data } = await axiosInstance.post('/api/auth/logout');
     return data;
