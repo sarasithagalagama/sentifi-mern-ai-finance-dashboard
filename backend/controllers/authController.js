@@ -153,4 +153,25 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, refresh, logout, getMe };
+/**
+ * @route   PUT /api/auth/profile
+ * @desc    Update user profile
+ * @access  Private
+ */
+const updateProfile = async (req, res, next) => {
+  try {
+    const updatedUser = await authService.updateUserProfile(
+      req.user._id,
+      req.body
+    );
+    res.json({
+      success: true,
+      user: updatedUser,
+      message: "Profile updated successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, refresh, logout, getMe, updateProfile };

@@ -5,9 +5,9 @@ import {
   ArrowRightLeft, 
   PiggyBank, 
   LineChart, 
-  Settings, 
+  Settings as SettingsIcon, 
   LogOut,
-  Sparkles
+  Upload
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -18,10 +18,12 @@ const Sidebar = () => {
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
-    { icon: LineChart, label: 'Statistics', path: '/statistics' }, // Placeholder path
+    { icon: LineChart, label: 'Statistics', path: '/statistics' },
     { icon: ArrowRightLeft, label: 'Transactions', path: '/transactions' },
     { icon: Wallet, label: 'Budgeting', path: '/budgets' },
-    { icon: PiggyBank, label: 'Investments', path: '/investments' }, // Placeholder path
+    { icon: PiggyBank, label: 'Investments', path: '/investments' },
+    { icon: Upload, label: 'Import Data', path: '/import' },
+    { icon: SettingsIcon, label: 'Settings', path: '/settings' },
   ];
 
   const handleLogout = () => {
@@ -50,7 +52,7 @@ const Sidebar = () => {
           fontWeight: 'bold',
           color: '#000'
         }}>%</div>
-        <span style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff' }}>Yanz</span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>Yanz</span>
       </div>
 
       {/* Main Menu */}
@@ -83,18 +85,6 @@ const Sidebar = () => {
 
       {/* Bottom Menu */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--spacing-md)',
-          padding: '12px 16px',
-          cursor: 'pointer',
-          color: 'var(--text-secondary)'
-        }}>
-          <Settings size={20} />
-          <span>Settings</span>
-        </div>
-        
         <div onClick={handleLogout} style={{
           display: 'flex',
           alignItems: 'center',

@@ -68,7 +68,7 @@ const Budgets = () => {
                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: b.color }} />
                    <h3>{b.category}</h3>
                  </div>
-                 <span className="badge" style={{ background: '#333' }}>
+                 <span className="badge" style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}>
                    {percent >= 100 ? 'Exceeded' : percent > 80 ? 'Warning' : 'On Track'}
                  </span>
                </div>
@@ -78,7 +78,7 @@ const Budgets = () => {
                    <span className="text-mute text-small">Spent</span>
                    <span style={{ fontWeight: 600 }}>${b.spent} / ${b.limit}</span>
                  </div>
-                 <div style={{ width: '100%', height: 8, background: '#333', borderRadius: 4 }}>
+                 <div style={{ width: '100%', height: 8, background: 'var(--bg-tertiary)', borderRadius: 4 }}>
                    <div style={{ width: `${percent}%`, height: '100%', background: b.color, borderRadius: 4 }} />
                  </div>
                </div>

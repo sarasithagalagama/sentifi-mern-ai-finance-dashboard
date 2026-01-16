@@ -6,12 +6,12 @@ const Import = () => {
       {/* Upload Zone */}
       <div className="card" style={{ 
         height: 300, 
-        border: '2px dashed #444', 
+        border: '2px dashed var(--border)', 
         display: 'flex', 
         flexDirection: 'column',
         alignItems: 'center', 
         justifyContent: 'center',
-        background: '#1a1a1a',
+        background: 'var(--card-accent)',
         cursor: 'pointer',
         transition: 'border-color 0.2s'
       }}>
@@ -62,7 +62,7 @@ const Import = () => {
              ].map((file, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <div style={{ padding: 8, background: '#333', borderRadius: 8 }}>
+                    <div style={{ padding: 8, background: 'var(--bg-tertiary)', borderRadius: 8 }}>
                       <FileText size={16} />
                     </div>
                     <div>

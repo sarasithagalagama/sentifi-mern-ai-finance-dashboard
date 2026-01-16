@@ -25,4 +25,9 @@ export const authApi = {
     const { data } = await axiosInstance.post('/api/auth/refresh');
     return data;
   },
+  
+  updateProfile: async (userData: any) => {
+    const { data } = await axiosInstance.put('/api/auth/profile', userData);
+    return data;
+  }
 };

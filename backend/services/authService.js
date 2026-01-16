@@ -91,8 +91,39 @@ const logoutUser = async (userId) => {
   await User.findByIdAndUpdate(userId, { refreshToken: null });
 };
 
+const updateUserProfile = async (userId, updateData) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  if (updateData.name) user.name = updateData.name;
+  if (updateData.email) user.email = updateData.email; // Note: In real app, email change usually requires verification
+  if (updateData.defaultCurrency)
+    user.defaultCurrency = updateData.defaultCurrency;
+
+  // Handle Password Update if separate or allowed here
+  if (updateData.newPassword && updateData.currentPassword) {
+    const isMatch = await user.comparePassword(updateData.currentPassword);
+    if (!isMatch) throw new Error("Incorrect current password");
+    user.password = updateData.newPassword;
+  }
+
+  await user.save();
+
+  return {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    defaultCurrency: user.defaultCurrency,
+  };
+};
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  updateUserProfile,
 };

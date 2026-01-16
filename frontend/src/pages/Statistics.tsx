@@ -49,8 +49,8 @@ const Statistics = () => {
               <XAxis dataKey="name" stroke="#888" />
               <YAxis stroke="#888" />
               <Tooltip 
-                contentStyle={{ background: '#1c1c1c', border: '1px solid #333' }}
-                itemStyle={{ color: '#fff' }}
+                contentStyle={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}
+                itemStyle={{ color: 'var(--text-primary)' }}
               />
               <Area type="monotone" dataKey="income" stroke="var(--primary)" fillOpacity={1} fill="url(#colorIncome)" />
               <Area type="monotone" dataKey="expense" stroke="#ef4444" fillOpacity={1} fill="url(#colorExpense)" />

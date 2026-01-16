@@ -14,6 +14,8 @@ const transactionRoutes = require("./backend/routes/transactionRoutes");
 const budgetRoutes = require("./backend/routes/budgetRoutes");
 const aiRoutes = require("./backend/routes/aiRoutes");
 const importRoutes = require("./backend/routes/importRoutes");
+const investmentRoutes = require("./backend/routes/investmentRoutes");
+const dashboardRoutes = require("./backend/routes/dashboardRoutes");
 
 // Initialize Express app
 const app = express();
@@ -56,6 +58,8 @@ app.use("/api/transactions", transactionRoutes);
 app.use("/api/budgets", budgetRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/import", importRoutes);
+app.use("/api/investments", investmentRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Health Check Route
 app.get("/api/health", (req, res) => {
@@ -77,6 +81,8 @@ app.get("/", (req, res) => {
       budgets: "/api/budgets",
       ai: "/api/ai",
       import: "/api/import",
+      investments: "/api/investments",
+      dashboard: "/api/dashboard",
     },
   });
 });

@@ -41,9 +41,10 @@ const Layout: React.FC<LayoutProps> = ({ children, title = "Dashboard", subtitle
                 placeholder="Budgeting, Investments, etc..." 
                 style={{ 
                   paddingLeft: 40, 
-                  background: 'var(--bg-secondary)', 
+                  background: 'var(--bg-tertiary)', 
                   borderRadius: 'var(--radius-full)',
-                  border: '1px solid var(--border)'
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-primary)'
                 }}
               />
             </div>

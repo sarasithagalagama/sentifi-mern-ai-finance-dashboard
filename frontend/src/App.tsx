@@ -12,10 +12,14 @@ import Budgets from './pages/Budgets';
 import Statistics from './pages/Statistics';
 import Investments from './pages/Investments';
 import Import from './pages/Import';
+import Settings from './pages/Settings';
+
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
     <AuthProvider>
+      <ThemeProvider>
       <Router>
         <Routes>
           {/* Public Routes */}
@@ -71,10 +75,19 @@ function App() {
             </ProtectedRoute>
           } />
 
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <Layout title="Settings" subtitle="Preferences & Security">
+                <Settings />
+              </Layout>
+            </ProtectedRoute>
+          } />
+
           {/* Fallback */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
+      </ThemeProvider>
     </AuthProvider>
   );
 }
