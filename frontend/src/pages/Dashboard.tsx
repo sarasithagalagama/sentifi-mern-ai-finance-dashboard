@@ -59,6 +59,44 @@ const Dashboard = () => {
               <h3>Quick Financial Overview</h3>
               <p className="text-mute text-small">Stay on Top of Your Finances</p>
             </div>
+            
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button 
+                onClick={async () => {
+                  const toastId = toast.loading('Sending report...');
+                  try {
+                    await reportApi.sendMonthlyReport();
+                    toast.success('Report sent to your email!', { id: toastId });
+                  } catch (error) {
+                    toast.error('Failed to email report', { id: toastId });
+                  }
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '8px 16px',
+                  background: 'var(--bg-tertiary)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-md)',
+                  color: 'var(--text-primary)',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  fontWeight: 500
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--primary)';
+                  e.currentTarget.style.color = 'var(--primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+              >
+                <Mail size={18} />
+                Email Report
+              </button>
+            </div>
 
           </div>
           
