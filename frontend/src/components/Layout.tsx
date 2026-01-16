@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title = "Dashboard", subtitle
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-xl)' }}>
             {/* Search Bar */}
             <div style={{ position: 'relative', width: 300 }}>
-              <Search size={18} style={{ position: 'absolute', left: 12, top: 12, color: 'var(--text-secondary)' }} />
+              <Search size={18} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
               <input 
                 type="text" 
                 placeholder="Budgeting, Investments, etc..." 
