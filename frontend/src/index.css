@@ -151,8 +151,8 @@ h3 { font-size: 1.25rem; font-weight: 600; }
 
 /* Forms (Dark Mode) */
 input {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03); /* slightly transparent for blending */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* more visible border */
   color: white;
   padding: 1rem 1.25rem;
   border-radius: var(--radius-md);
@@ -161,14 +161,19 @@ input {
   transition: var(--transition);
 }
 
+input::placeholder {
+  color: rgba(255, 255, 255, 0.3); /* lighter placeholder */
+}
+
 /* Fix for Chrome Autofill turning inputs white */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px var(--bg-tertiary) inset !important;
+    -webkit-box-shadow: 0 0 0 30px #222 inset !important; /* darker solid background for autofill */
     -webkit-text-fill-color: white !important;
     caret-color: white;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 input:focus {

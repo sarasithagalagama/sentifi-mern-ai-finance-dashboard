@@ -49,7 +49,7 @@ const Register = () => {
           <div style={{ 
              width: 56, height: 56, 
              background: 'rgba(74, 222, 128, 0.1)', 
-             borderRadius: 16, 
+             borderRadius: '50%', 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
              margin: '0 auto 1.5rem auto',
              color: 'var(--primary)',
