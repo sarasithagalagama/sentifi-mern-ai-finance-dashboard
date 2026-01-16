@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Search, Filter, ArrowUpRight, ArrowDownLeft, MoreHorizontal, Loader } from 'lucide-react';
+import { Search, Filter, ArrowUpRight, ArrowDownLeft, MoreHorizontal, Loader, Trash2 } from 'lucide-react';
 import { transactionApi } from '../api/transactionApi';
 import TransactionModal from '../components/TransactionModal';
+import toast from 'react-hot-toast';
 
 const Transactions = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,6 +10,8 @@ const Transactions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     fetchTransactions();
@@ -24,6 +27,40 @@ const Transactions = () => {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedIds(filteredTransactions.map(tx => tx._id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const handleSelectOne = (id: string) => {
+    setSelectedIds(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.length === 0) return;
+
+    if (!window.confirm(`Are you sure you want to delete ${selectedIds.length} transaction(s)? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      setDeleting(true);
+      await transactionApi.bulkDeleteTransactions(selectedIds);
+      toast.success(`Successfully deleted ${selectedIds.length} transaction(s)`);
+      setSelectedIds([]);
+      fetchTransactions();
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Failed to delete transactions');
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -55,7 +92,24 @@ const Transactions = () => {
             style={{ paddingLeft: 40 }}
           />
         </div>
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          {selectedIds.length > 0 && (
+            <button 
+              className="btn-primary" 
+              onClick={handleBulkDelete}
+              disabled={deleting}
+              style={{ 
+                background: 'var(--danger)', 
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              <Trash2 size={18} />
+              {deleting ? 'Deleting...' : `Delete (${selectedIds.length})`}
+            </button>
+          )}
           <button className="btn-primary" style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}>
              <Filter size={18} style={{ marginRight: 8, verticalAlign: 'middle' }} /> Filter
           </button>
@@ -73,6 +127,14 @@ const Transactions = () => {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead style={{ background: 'var(--bg-tertiary)', borderBottom: '1px solid var(--border)' }}>
             <tr style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
+              <th style={{ padding: '16px', width: '40px' }}>
+                <input 
+                  type="checkbox" 
+                  checked={selectedIds.length === filteredTransactions.length && filteredTransactions.length > 0}
+                  onChange={handleSelectAll}
+                  style={{ cursor: 'pointer' }}
+                />
+              </th>
               <th style={{ padding: '16px' }}>Transaction</th>
               <th>Category</th>
               <th>Date</th>
@@ -84,6 +146,14 @@ const Transactions = () => {
           <tbody>
             {filteredTransactions.map((tx) => (
               <tr key={tx._id} style={{ borderBottom: '1px solid var(--border)' }}>
+                <td style={{ padding: '16px' }}>
+                  <input 
+                    type="checkbox" 
+                    checked={selectedIds.includes(tx._id)}
+                    onChange={() => handleSelectOne(tx._id)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </td>
                 <td style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{ 
                     width: 40, height: 40, 
@@ -114,7 +184,7 @@ const Transactions = () => {
               </tr>
             ))}
             {filteredTransactions.length === 0 && (
-                <tr><td colSpan={6} style={{padding:'2rem', textAlign:'center', color:'var(--text-secondary)'}}>No transactions found</td></tr>
+                <tr><td colSpan={7} style={{padding:'2rem', textAlign:'center', color:'var(--text-secondary)'}}>No transactions found</td></tr>
             )}
           </tbody>
         </table>
