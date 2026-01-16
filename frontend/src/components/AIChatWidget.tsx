@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X, Send, Bot, Sparkles, User, Loader } from 'lucide-react';
 import { aiApi } from '../api/aiApi';
+import { useAuth } from '../context/AuthContext';
 
 interface Message {
   id: string;
@@ -31,13 +32,19 @@ const AIChatWidget = () => {
     scrollToBottom();
   }, [messages, isOpen]);
 
+  const { user } = useAuth();
+
   // Suggested questions
-  const suggestedQuestions = [
+  const defaultQuestions = [
     "How can I save more money?",
     "Analyze my spending habits",
     "What are my highest expenses?",
     "Create a monthly budget plan"
   ];
+
+  const suggestedQuestions = (user?.customQuestions && user.customQuestions.length > 0) 
+    ? user.customQuestions 
+    : defaultQuestions;
 
   const handleSend = async (textOverride?: string) => {
     const textToSend = typeof textOverride === 'string' ? textOverride : input;

@@ -8,6 +8,7 @@ interface User {
   email: string;
   role: string;
   defaultCurrency: string;
+  customQuestions?: string[];
 }
 
 interface AuthContextType {
