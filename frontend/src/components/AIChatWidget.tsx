@@ -251,25 +251,33 @@ const AIChatWidget = () => {
           <div style={{ 
             padding: '0 16px 12px 16px',
             display: 'flex', 
+            flexWrap: 'wrap',
             gap: '8px',
-            overflowX: 'auto',
-            scrollbarWidth: 'none', // Firefox
-            msOverflowStyle: 'none',  // IE/Edge
           }}>
              {suggestedQuestions.map((q, i) => (
                <button
                  key={i}
                  onClick={() => handleSend(q)}
                  style={{
-                   whiteSpace: 'nowrap',
                    padding: '8px 12px',
-                   borderRadius: '16px',
-                   border: '1px solid var(--primary)',
-                   background: 'rgba(74, 222, 128, 0.1)',
-                   color: 'var(--primary)',
+                   borderRadius: '12px',
+                   border: '1px solid var(--border)',
+                   background: 'var(--bg-tertiary)',
+                   color: 'var(--text-primary)',
                    fontSize: '0.8rem',
                    cursor: 'pointer',
-                   flexShrink: 0
+                   transition: 'all 0.2s',
+                   textAlign: 'left'
+                 }}
+                 onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--primary)';
+                    e.currentTarget.style.color = 'var(--primary)';
+                    e.currentTarget.style.background = 'rgba(74, 222, 128, 0.05)';
+                 }}
+                 onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border)';
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                    e.currentTarget.style.background = 'var(--bg-tertiary)';
                  }}
                >
                  {q}
