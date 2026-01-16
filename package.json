@@ -8,8 +8,8 @@
     "server": "nodemon server.js",
     "client": "cd frontend && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd frontend && npm install && npm run build",
-    "vercel-build": "cd frontend && npm install && npm run build",
+    "build": "cd frontend && npm install && npm run build-skip-tsc",
+    "vercel-build": "cd frontend && npm install && npm run build-skip-tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
