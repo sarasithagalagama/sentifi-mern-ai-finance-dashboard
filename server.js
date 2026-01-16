@@ -86,8 +86,8 @@ if (process.env.NODE_ENV === "production") {
   // Use process.cwd() for Vercel environment
   app.use(express.static(path.join(process.cwd(), "frontend/dist")));
 
-  // Handle SPA routing - only for non-API routes
-  app.get(/^(?!\/api).*/, (req, res) => {
+  // Handle SPA routing - only for non-API and non-asset routes
+  app.get(/^(?!\/api|\/assets).*/, (req, res) => {
     res.sendFile(path.resolve(process.cwd(), "frontend", "dist", "index.html"));
   });
 } else {
