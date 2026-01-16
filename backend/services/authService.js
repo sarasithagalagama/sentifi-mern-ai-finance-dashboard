@@ -38,6 +38,7 @@ const registerUser = async (userData) => {
       email: user.email,
       role: user.role,
       defaultCurrency: user.defaultCurrency,
+      customQuestions: user.customQuestions,
     },
     accessToken,
     refreshToken,
@@ -78,6 +79,7 @@ const loginUser = async (credentials) => {
       email: user.email,
       role: user.role,
       defaultCurrency: user.defaultCurrency,
+      customQuestions: user.customQuestions,
     },
     accessToken,
     refreshToken,
@@ -102,6 +104,8 @@ const updateUserProfile = async (userId, updateData) => {
   if (updateData.email) user.email = updateData.email; // Note: In real app, email change usually requires verification
   if (updateData.defaultCurrency)
     user.defaultCurrency = updateData.defaultCurrency;
+  if (updateData.customQuestions)
+    user.customQuestions = updateData.customQuestions;
 
   // Handle Password Update if separate or allowed here
   if (updateData.newPassword && updateData.currentPassword) {
@@ -118,6 +122,7 @@ const updateUserProfile = async (userId, updateData) => {
     email: user.email,
     role: user.role,
     defaultCurrency: user.defaultCurrency,
+    customQuestions: user.customQuestions,
   };
 };
 

@@ -36,6 +36,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       select: false,
     },
+    customQuestions: {
+      type: [String],
+      default: [
+        "How can I save more money?",
+        "Analyze my spending habits",
+        "What are my highest expenses?",
+        "Create a monthly budget plan",
+      ],
+    },
   },
   {
     timestamps: true,

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { authApi } from '../api/authApi';
-import { User, Lock, Moon, Sun, Save, Loader, Check } from 'lucide-react';
+import { User, Lock, Moon, Sun, Save, Loader, Check, X } from 'lucide-react';
 
 const Settings = () => {
   const { user, setUser } = useAuth();
@@ -12,6 +12,7 @@ const Settings = () => {
     name: '',
     email: '',
     defaultCurrency: 'USD',
+    customQuestions: [] as string[],
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: ''
@@ -26,7 +27,8 @@ const Settings = () => {
         ...prev,
         name: user.name || '',
         email: user.email || '',
-        defaultCurrency: user.defaultCurrency || 'USD'
+        defaultCurrency: user.defaultCurrency || 'USD',
+        customQuestions: user.customQuestions || []
       }));
     }
   }, [user]);
@@ -50,7 +52,8 @@ const Settings = () => {
       const updateData: any = {
         name: formData.name,
         email: formData.email,
-        defaultCurrency: formData.defaultCurrency
+        defaultCurrency: formData.defaultCurrency,
+        customQuestions: formData.customQuestions.filter(q => q.trim() !== '')
       };
 
       if (formData.newPassword) {
@@ -226,6 +229,77 @@ const Settings = () => {
                       <option value="JPY">JPY (¥)</option>
                       <option value="LKR">LKR (Rs)</option>
                   </select>
+                   </select>
+               </div>
+
+               {/* Custom AI Questions */}
+               <div style={{ marginBottom: 'var(--spacing-lg)' }}>
+                  <label style={{ display: 'block', marginBottom: 8, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                     Custom AI Questions
+                  </label>
+                  <p className="text-small text-mute" style={{ marginBottom: '1rem' }}>
+                    Add quick questions for the AI Financial Advisor.
+                  </p>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {formData.customQuestions.map((q, index) => (
+                      <div key={index} style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                          type="text"
+                          value={q}
+                          onChange={(e) => {
+                            const newQuestions = [...formData.customQuestions];
+                            newQuestions[index] = e.target.value;
+                            setFormData({ ...formData, customQuestions: newQuestions });
+                          }}
+                          style={{
+                            flex: 1,
+                            padding: '0.8rem',
+                            background: 'var(--input-bg)',
+                            border: '1px solid var(--input-border)',
+                            borderRadius: 'var(--radius-md)',
+                            color: 'var(--text-primary)'
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newQuestions = formData.customQuestions.filter((_, i) => i !== index);
+                            setFormData({ ...formData, customQuestions: newQuestions });
+                          }}
+                          style={{
+                            background: 'rgba(239, 68, 68, 0.1)',
+                            color: 'var(--danger)',
+                            border: 'none',
+                            borderRadius: 'var(--radius-md)',
+                            padding: '0 12px',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          <X size={18} />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, customQuestions: [...formData.customQuestions, ''] })}
+                      style={{
+                        alignSelf: 'flex-start',
+                        background: 'none',
+                        border: '1px dashed var(--border)',
+                        color: 'var(--primary)',
+                        padding: '8px 16px',
+                        borderRadius: 'var(--radius-md)',
+                        cursor: 'pointer',
+                        marginTop: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      + Add Question
+                    </button>
+                  </div>
                </div>
                
                <div style={{ borderTop: '1px solid var(--border)', margin: 'var(--spacing-lg) 0' }} />
