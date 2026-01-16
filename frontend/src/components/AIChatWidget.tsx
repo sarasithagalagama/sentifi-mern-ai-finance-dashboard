@@ -294,21 +294,7 @@ const AIChatWidget = () => {
                </button>
              ))}
           </div>
-                 onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--primary)';
-                    e.currentTarget.style.color = 'var(--primary)';
-                    e.currentTarget.style.background = 'rgba(74, 222, 128, 0.05)';
-                 }}
-                 onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border)';
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                    e.currentTarget.style.background = 'var(--bg-tertiary)';
-                 }}
-               >
-                 {q}
-               </button>
-             ))}
-          </div>
+
 
           {/* Input Area */}
           <div style={{
