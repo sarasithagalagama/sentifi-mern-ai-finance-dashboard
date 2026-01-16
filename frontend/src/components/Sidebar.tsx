@@ -52,7 +52,7 @@ const Sidebar = () => {
           fontWeight: 'bold',
           color: '#000'
         }}>%</div>
-        <span style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>Yanz</span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>Sentifi</span>
       </div>
 
       {/* Main Menu */}
