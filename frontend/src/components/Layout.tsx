@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import { Search, Bell } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import AIChatWidget from './AIChatWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -71,6 +72,9 @@ const Layout: React.FC<LayoutProps> = ({ children, title = "Dashboard", subtitle
           {children}
         </main>
       </div>
+      
+      {/* AI Chat Widget */}
+      <AIChatWidget />
     </div>
   );
 };
