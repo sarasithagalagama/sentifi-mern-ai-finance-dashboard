@@ -20,7 +20,12 @@ import { ThemeProvider } from './context/ThemeContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
+    console.log("Environment Debug:", import.meta.env);
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
+  
+  if (!import.meta.env.VITE_GOOGLE_CLIENT_ID) {
+    console.warn("Missing VITE_GOOGLE_CLIENT_ID in environment variables");
+  }
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
