@@ -43,29 +43,19 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-page" style={{ 
-      background: 'radial-gradient(circle at 50% 50%, #1e1e1e 0%, #121212 100%)',
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div className="auth-card" style={{ 
-        background: 'rgba(30, 30, 30, 0.6)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid #333',
-        maxWidth: 420
-      }}>
+    <div className="auth-page">
+      <div className="auth-card">
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ 
-             width: 48, height: 48, 
-             background: 'var(--primary)', 
-             borderRadius: 12, 
+             width: 56, height: 56, 
+             background: 'rgba(74, 222, 128, 0.1)', 
+             borderRadius: 16, 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
-             margin: '0 auto 1rem auto',
-             color: '#000'
+             margin: '0 auto 1.5rem auto',
+             color: 'var(--primary)',
+             border: '1px solid rgba(74, 222, 128, 0.2)'
           }}>
-            <UserPlus size={24} />
+            <UserPlus size={28} />
           </div>
           <h1>Create Account</h1>
           <p className="text-mute">Join us to start tracking your expenses</p>
@@ -79,7 +69,8 @@ const Register = () => {
             border: '1px solid var(--danger)',
             borderRadius: 'var(--radius-md)',
             color: 'var(--danger)',
-            fontSize: '0.9rem'
+            fontSize: '0.9rem',
+            textAlign: 'center'
           }}>
             {error}
           </div>
@@ -96,7 +87,6 @@ const Register = () => {
               required
               placeholder="John Doe"
               minLength={2}
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
@@ -109,7 +99,6 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="name@example.com"
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
@@ -123,7 +112,6 @@ const Register = () => {
               required
               placeholder="Min 6 characters"
               minLength={6}
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
@@ -137,23 +125,16 @@ const Register = () => {
               required
               placeholder="Re-enter password"
               minLength={6}
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
-          <button type="submit" className="btn-submit" disabled={loading} style={{ 
-            marginTop: '1rem', 
-            borderRadius: 'var(--radius-full)',
-            background: 'var(--primary)',
-            color: '#000',
-            fontWeight: 700 
-          }}>
+          <button type="submit" className="btn-submit" disabled={loading}>
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>
         </form>
 
-        <p className="auth-footer" style={{ marginTop: '2rem' }}>
-          Already have an account? <Link to="/login" style={{ color: 'var(--primary)' }}>Login</Link>
+        <p className="auth-footer">
+          Already have an account? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>Login</Link>
         </p>
       </div>
     </div>

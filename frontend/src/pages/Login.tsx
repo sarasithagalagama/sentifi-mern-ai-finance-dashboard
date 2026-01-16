@@ -26,29 +26,19 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-page" style={{ 
-      background: 'radial-gradient(circle at 50% 50%, #1e1e1e 0%, #121212 100%)',
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <div className="auth-card" style={{ 
-        background: 'rgba(30, 30, 30, 0.6)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid #333',
-        maxWidth: 420
-      }}>
+    <div className="auth-page">
+      <div className="auth-card">
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ 
-             width: 48, height: 48, 
-             background: 'var(--primary)', 
-             borderRadius: 12, 
+             width: 56, height: 56, 
+             background: 'rgba(74, 222, 128, 0.1)', 
+             borderRadius: 16, 
              display: 'flex', alignItems: 'center', justifyContent: 'center',
-             margin: '0 auto 1rem auto',
-             color: '#000'
+             margin: '0 auto 1.5rem auto',
+             color: 'var(--primary)',
+             border: '1px solid rgba(74, 222, 128, 0.2)'
           }}>
-            <LogIn size={24} />
+            <LogIn size={28} />
           </div>
           <h1>Welcome Back</h1>
           <p className="text-mute">Enter your credentials to access your finance dashboard</p>
@@ -64,14 +54,15 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="name@example.com"
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
           <div className="form-group">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <label htmlFor="password">Password</label>
-              <Link to="#" style={{ fontSize: '0.8rem', color: 'var(--primary)' }}>Forgot password?</Link>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <label htmlFor="password" style={{ marginBottom: 0 }}>Password</label>
+              <Link to="#" style={{ fontSize: '0.85rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>
+                Forgot password?
+              </Link>
             </div>
             <input
               type="password"
@@ -80,23 +71,16 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="••••••••"
-              style={{ background: '#121212', borderColor: '#333' }}
             />
           </div>
 
-          <button type="submit" className="btn-submit" disabled={loading} style={{ 
-            marginTop: '1rem', 
-            borderRadius: 'var(--radius-full)',
-            background: 'var(--primary)',
-            color: '#000',
-            fontWeight: 700
-          }}>
+          <button type="submit" className="btn-submit" disabled={loading}>
             {loading ? 'Logging in...' : 'Sign In'}
           </button>
         </form>
 
-        <p className="auth-footer" style={{ marginTop: '2rem' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)' }}>Sign up</Link>
+        <p className="auth-footer">
+          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600 }}>Sign up</Link>
         </p>
       </div>
     </div>
