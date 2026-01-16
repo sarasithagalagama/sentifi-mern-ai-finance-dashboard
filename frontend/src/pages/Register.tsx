@@ -330,10 +330,10 @@ const Register = () => {
           </button>
         </form>
 
-        <div style={{ margin: '1.5rem 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }}></div>
-          <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>or</span>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border)' }}></div>
+        <div style={{ display: 'flex', alignItems: 'center', margin: '1.5rem 0', opacity: 0.8 }}>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
+          <span style={{ padding: '0 10px', color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: 500 }}>or continue with</span>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--border), transparent)' }}></div>
         </div>
 
         <button 
@@ -343,26 +343,27 @@ const Register = () => {
           style={{
             width: '100%',
             padding: '14px',
-            background: '#1E1E1E',
-            border: '1px solid #333',
+            background: 'white',
+            border: 'none',
             borderRadius: '14px',
-            color: 'white',
+            color: '#111',
             fontSize: '0.95rem',
-            fontWeight: 500,
+            fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '10px',
-            transition: 'all 0.2s'
+            gap: '12px',
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
           }}
           onMouseEnter={(e) => {
-             e.currentTarget.style.borderColor = 'var(--text-secondary)';
-             e.currentTarget.style.background = '#27272a';
+             e.currentTarget.style.transform = 'translateY(-1px)';
+             e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
           }}
           onMouseLeave={(e) => {
-             e.currentTarget.style.borderColor = '#333';
-             e.currentTarget.style.background = '#1E1E1E';
+             e.currentTarget.style.transform = 'translateY(0)';
+             e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
