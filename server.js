@@ -101,23 +101,27 @@ app.use(notFound);
 // Global Error Handler
 app.use(errorHandler);
 
-// Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`
-╔═══════════════════════════════════════════════════════╗
-║                                                       ║
-║   🚀 MERN Expense Tracker Server                     ║
-║                                                       ║
-║   Environment: ${
+// Start Server only if not running in Vercel
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`
+  ╔═══════════════════════════════════════════════════════╗
+  ║                                                       ║
+  ║   🚀 MERN Expense Tracker Server                     ║
+  ║                                                       ║
+  ║   Environment: ${
     process.env.NODE_ENV || "development"
   }                              ║
-║   Port: ${PORT}                                          ║
-║   URL: http://localhost:${PORT}                        ║
-║                                                       ║
-╚═══════════════════════════════════════════════════════╝
-  `);
-});
+  ║   Port: ${PORT}                                          ║
+  ║   URL: http://localhost:${PORT}                        ║
+  ║                                                       ║
+  ║   ╚═══════════════════════════════════════════════════════╝
+    `);
+  });
+}
+
+module.exports = app;
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {
