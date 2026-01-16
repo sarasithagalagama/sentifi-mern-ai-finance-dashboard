@@ -5,13 +5,16 @@ import {
   Target, 
   Landmark, 
   MoreHorizontal,
-  Loader
+  Loader,
+  Mail
 } from 'lucide-react';
 import { 
   PieChart, Pie, Cell, ResponsiveContainer, 
   BarChart, Bar, XAxis, Tooltip 
 } from 'recharts';
 import { dashboardApi } from '../api/dashboardApi';
+import { reportApi } from '../api/reportApi';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const [data, setData] = useState<any>(null);

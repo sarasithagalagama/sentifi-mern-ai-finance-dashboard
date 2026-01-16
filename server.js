@@ -60,6 +60,8 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/import", importRoutes);
 app.use("/api/investments", investmentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/reports", require("./backend/routes/reportRoutes"));
+app.use("/api/reports", require("./backend/routes/reportRoutes"));
 
 // Health Check Route
 app.get("/api/health", (req, res) => {
