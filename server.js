@@ -72,22 +72,22 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Root Route
-app.get("/", (req, res) => {
-  res.json({
-    message: "MERN Expense Tracker API",
-    version: "1.0.0",
-    endpoints: {
-      auth: "/api/auth",
-      transactions: "/api/transactions",
-      budgets: "/api/budgets",
-      ai: "/api/ai",
-      import: "/api/import",
-      investments: "/api/investments",
-      dashboard: "/api/dashboard",
-    },
+// Serve frontend
+const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
-});
+} else {
+  app.get("/", (req, res) => {
+    res.json({
+      message: "MERN Expense Tracker API",
+      version: "1.0.0",
+    });
+  });
+}
 
 // 404 Handler
 app.use(notFound);
