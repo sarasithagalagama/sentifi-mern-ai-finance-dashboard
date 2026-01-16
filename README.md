@@ -1,311 +1,312 @@
-# MERN Expense Tracker - Professional Grade Financial Management App
+# 💰 Sentifi - AI-Powered Finance Dashboard
 
-A sophisticated expense tracking application built with the MERN stack, featuring AI-powered insights, multi-currency support, budget management, and automated recurring transactions.
+<div align="center">
 
-## 🌟 Features
+![Sentifi Logo](https://img.shields.io/badge/Sentifi-Finance%20Dashboard-4ade80?style=for-the-badge&logo=sparkles)
 
-### Core Functionality
-- **💳 Transaction Management**: Full CRUD operations with advanced filtering and search
-- **📊 Budget Tracking**: Set category-wise monthly limits with 80% and 100% notifications
-- **💱 Multi-Currency Support**: Real-time exchange rate conversion via ExchangeRate API
-- **🔄 Recurring Transactions**: Automated daily/weekly/monthly transaction creation via cron jobs
-- **📈 Data Visualization**: Interactive charts and analytics with Recharts
+**A modern, full-stack financial management platform with AI-powered insights**
 
-### AI-Powered Features
-- **🤖 AI Financial Coach**: Get personalized financial advice using Google Gemini API
-- **📸 Receipt Scanner**: Upload receipts with client-side OCR (Tesseract.js)
-- **🏷️ Smart Categorization**: Auto-categorize transactions based on merchant names
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com/)
 
-### Advanced Features
-- **📥 CSV/Excel Import**: Bulk upload transactions from bank statements
-- **🔐 Secure Authentication**: JWT with HttpOnly cookies and refresh tokens
-- **🎨 Modern UI**: Rich, responsive design with smooth animations
-- **📱 PWA Ready**: Installable progressive web app (to be implemented)
+[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Deployment](#-deployment) • [Tech Stack](#-tech-stack)
 
-## 🛠️ Tech Stack
+</div>
 
-### Backend
-- **Node.js & Express** - Server framework
-- **MongoDB & Mongoose** - Database and ODM
-- **JWT** - Authentication & authorization
-- **Multer & Cloudinary** - File upload handling
-- **node-cron** - Scheduled tasks
-- **@google/generative-ai** - Gemini API for AI features
-- **csv-parser & xlsx** - File parsing
+---
 
-### Frontend (To Be Completed)
-- **React 18 & TypeScript** - UI library
-- **Vite** - Build tool
-- **React Router** - Navigation
-- **Axios** - HTTP client
-- **Recharts** - Data visualization
-- **Tesseract.js** - Client-side OCR
-- **react-hot-toast** - Notifications
+## 📖 Overview
 
-## 📁 Project Structure
+Sentifi is a comprehensive financial management platform that combines traditional expense tracking with cutting-edge AI technology. Built with the MERN stack, it offers real-time insights, intelligent financial advice, and seamless user experience across all devices.
 
-```
-mern-finance-dashboard/
-├── backend/
-│   ├── config/         # Database and service configurations
-│   ├── controllers/    # Request handlers
-│   ├── middleware/     # Auth, upload, error handling
-│   ├── models/         # Mongoose schemas
-│   ├── routes/         # API route definitions
-│   ├── services/       # Business logic layer
-│   └── utils/          # Helper functions
-├── frontend/          # React application (in progress)
-├── server.js          # Express server entry point
-├── .env              # Environment variables
-└── package.json
-```
+## ✨ Features
 
-## 🚀 Getting Started
+### 💳 Core Financial Management
+- **Transaction Tracking** - Record income and expenses with detailed categorization
+- **Budget Management** - Set and monitor budgets by category with visual progress tracking
+- **Investment Portfolio** - Track stocks, crypto, and other assets with real-time values
+- **Recurring Transactions** - Automate regular income and expenses
+- **Multi-Currency Support** - Handle transactions in different currencies
+
+### 🤖 AI-Powered Features
+- **AI Financial Advisor** - Chat with an intelligent assistant powered by Google Gemini
+- **Custom Questions** - Personalize AI suggestions with your own financial queries
+- **Smart Categorization** - Automatic transaction categorization using AI
+- **Receipt Scanning** - Extract transaction details from receipt images
+- **Financial Insights** - Get personalized advice based on your spending patterns
+
+### 📊 Analytics & Reporting
+- **Interactive Dashboards** - Beautiful charts and graphs for data visualization
+- **Spending Analysis** - Detailed breakdowns by category, time period, and trends
+- **Email Reports** - Receive monthly financial summaries via email
+- **Goal Tracking** - Set and monitor financial goals with progress indicators
+- **Statistics Page** - Comprehensive financial metrics and trends
+
+### 🔐 Authentication & Security
+- **Email/Password Authentication** - Secure user registration and login
+- **Google OAuth** - One-click sign-in with Google via Firebase
+- **JWT Tokens** - Secure session management with access and refresh tokens
+- **Password Encryption** - Industry-standard bcrypt hashing
+- **Protected Routes** - Role-based access control
+
+### 🎨 User Experience
+- **Modern UI/UX** - Clean, intuitive interface with smooth animations
+- **Dark/Light Themes** - Multiple color schemes (Green, Purple, Blue, Orange)
+- **Responsive Design** - Optimized for desktop, tablet, and mobile
+- **Floating AI Chat** - Quick access to AI assistant from any page
+- **Real-time Updates** - Instant data synchronization
+
+## 🎯 Demo
+
+### Screenshots
+
+**Dashboard**
+- Real-time financial overview
+- Interactive charts and graphs
+- Quick access to key metrics
+
+**AI Chat Assistant**
+- Natural language financial queries
+- Personalized suggestions
+- Custom question management
+
+**Transaction Management**
+- Easy transaction creation
+- Advanced filtering and search
+- Category-based organization
+
+**Budget Tracking**
+- Visual progress indicators
+- Spending vs. budget comparison
+- Category-wise breakdowns
+
+## 🚀 Installation
 
 ### Prerequisites
-- Node.js 20+ installed
-- MongoDB Atlas account (or local MongoDB)
-- API Keys:
-  - [Gemini API Key](https://aistudio.google.com/app/apikey) (free)
-  - [ExchangeRate API Key](https://www.exchangerate-api.com/) (free tier)
-  - [Cloudinary Account](https://cloudinary.com/) (optional, for receipt uploads)
 
-### Installation
+- Node.js (v16 or higher)
+- MongoDB (local or Atlas)
+- npm or yarn
+- Google Gemini API key
+- Firebase project (for Google login)
+
+### Local Development Setup
 
 1. **Clone the repository**
-```bash
-git clone <your-repo-url>
-cd mern-finance-dashboard
+   ```bash
+   git clone https://github.com/yourusername/sentifi-mern-ai-finance-dashboard.git
+   cd sentifi-mern-ai-finance-dashboard
+   ```
+
+2. **Install dependencies**
+   ```bash
+   # Install backend dependencies
+   npm install
+
+   # Install frontend dependencies
+   cd frontend
+   npm install
+   cd ..
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   # Copy the example env file
+   cp .env.example .env
+   ```
+
+   Edit `.env` and add your credentials:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_ACCESS_SECRET=your_jwt_access_secret
+   JWT_REFRESH_SECRET=your_jwt_refresh_secret
+   GEMINI_API_KEY=your_gemini_api_key
+   CLIENT_URL=http://localhost:5173
+   NODE_ENV=development
+   ```
+
+4. **Configure Firebase**
+   
+   Edit `frontend/src/firebaseConfig.ts` with your Firebase credentials:
+   ```typescript
+   const firebaseConfig = {
+     apiKey: "your_api_key",
+     authDomain: "your_project.firebaseapp.com",
+     projectId: "your_project_id",
+     // ... other config
+   };
+   ```
+
+5. **Run the application**
+   ```bash
+   # Start backend server (from root directory)
+   npm run dev
+
+   # In a new terminal, start frontend (from root directory)
+   cd frontend
+   npm run dev
+   ```
+
+6. **Access the application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
+
+## 📦 Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import repository on [Vercel](https://vercel.com/new)
+3. Add environment variables
+4. Deploy!
+
+**Required Environment Variables:**
+- `MONGODB_URI`
+- `JWT_ACCESS_SECRET`
+- `JWT_REFRESH_SECRET`
+- `GEMINI_API_KEY`
+- `CLIENT_URL`
+- `NODE_ENV=production`
+
+## 🛠 Tech Stack
+
+### Frontend
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **React Router** - Client-side routing
+- **Recharts** - Data visualization
+- **Lucide React** - Icon library
+- **React Hot Toast** - Notifications
+- **Axios** - HTTP client
+
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **JWT** - Authentication
+- **bcryptjs** - Password hashing
+- **Google Gemini AI** - AI integration
+- **Nodemailer** - Email service
+- **Node-cron** - Scheduled tasks
+
+### Authentication
+- **Firebase Auth** - Google OAuth
+- **JWT** - Session management
+- **bcrypt** - Password encryption
+
+### DevOps & Tools
+- **Vercel** - Hosting platform
+- **MongoDB Atlas** - Cloud database
+- **Git** - Version control
+- **ESLint** - Code linting
+
+## 📂 Project Structure
+
+```
+sentifi-mern-ai-finance-dashboard/
+├── backend/
+│   ├── config/          # Database and app configuration
+│   ├── controllers/     # Route controllers
+│   ├── middleware/      # Auth, error handling, etc.
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API routes
+│   ├── services/        # Business logic
+│   └── utils/           # Helper functions
+├── frontend/
+│   ├── public/          # Static assets
+│   └── src/
+│       ├── api/         # API client functions
+│       ├── components/  # React components
+│       ├── context/     # React context providers
+│       ├── pages/       # Page components
+│       ├── index.css    # Global styles
+│       └── main.tsx     # App entry point
+├── .env.example         # Environment variables template
+├── DEPLOYMENT.md        # Deployment guide
+├── server.js            # Express server entry point
+├── vercel.json          # Vercel configuration
+└── README.md            # This file
 ```
 
-2. **Install backend dependencies**
-```bash
-npm install
-```
-
-3. **Configure environment variables**
-
-Edit `.env` file in the root directory:
-
-```env
-PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/expense-tracker
-NODE_ENV=development
-
-JWT_ACCESS_SECRET=your_super_secret_access_key_here
-JWT_REFRESH_SECRET=your_super_secret_refresh_key_here
-JWT_ACCESS_EXPIRY=15m
-JWT_REFRESH_EXPIRY=7d
-
-GEMINI_API_KEY=your_gemini_api_key
-EXCHANGE_RATE_API_KEY=your_exchange_rate_api_key
-
-# Optional: For receipt uploads
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-CLIENT_URL=http://localhost:5173
-```
-
-4. **Start the backend server**
-```bash
-npm run dev
-```
-
-The API server will run on `http://localhost:5000`
-
-5. **Install frontend dependencies (in progress)**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The frontend will run on `http://localhost:5173`
-
-## 📡 API Endpoints
+## 🔑 API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
-- `POST /api/auth/refresh` - Refresh access token
+- `POST /api/auth/google` - Google OAuth login
 - `POST /api/auth/logout` - Logout user
+- `POST /api/auth/refresh` - Refresh access token
 - `GET /api/auth/me` - Get current user
+- `PUT /api/auth/profile` - Update user profile
 
 ### Transactions
-- `GET /api/transactions` - Get all transactions (with filters)
+- `GET /api/transactions` - Get all transactions
 - `POST /api/transactions` - Create transaction
-- `GET /api/transactions/:id` - Get single transaction
 - `PUT /api/transactions/:id` - Update transaction
 - `DELETE /api/transactions/:id` - Delete transaction
-- `GET /api/transactions/analytics` - Get spending analytics
-
-**Query Parameters:**
-- `category` - Filter by category
-- `type` - Filter by type (income/expense)
-- `startDate` - Start date for range
-- `endDate` - End date for range
-- `search` - Search in description/merchant
-- `limit` - Results per page
-- `skip` - Pagination offset
 
 ### Budgets
 - `GET /api/budgets` - Get all budgets
-- `POST /api/budgets` - Create/update budget
-- `GET /api/budgets/:id` - Get single budget
+- `POST /api/budgets` - Create budget
+- `PUT /api/budgets/:id` - Update budget
 - `DELETE /api/budgets/:id` - Delete budget
-- `GET /api/budgets/notifications` - Get budget alerts
 
 ### AI Features
-- `POST /api/ai/chat` - Get financial advice
-  ```json
-  { "query": "How can I save more on groceries?" }
-  ```
+- `POST /api/ai/chat` - Chat with AI advisor
 - `POST /api/ai/categorize` - Auto-categorize transaction
-  ```json
-  { "merchantName": "Starbucks", "description": "Coffee" }
-  ```
-- `POST /api/ai/scan-receipt` - Upload receipt image
-  - Send as multipart/form-data with `receipt` field
+- `POST /api/ai/receipt` - Scan receipt
 
-### Import
-- `POST /api/import/csv` - Import transactions from CSV/Excel
-- `GET /api/import/template` - Download CSV template
-
-## 📊 CSV Import Format
-
-Download the template from `/api/import/template` or use this format:
-
-```csv
-Date,Amount,Category,Description,Type,Currency
-2024-01-01,50.00,Food & Dining,Grocery shopping,expense,USD
-2024-01-02,3000.00,Income,Monthly salary,income,USD
-```
-
-## 🔐 Security Features
-
-- **JWT Authentication**: Access tokens (15min) + Refresh tokens (7 days)
-- **HttpOnly Cookies**: Tokens stored securely in cookies
-- **Password Hashing**: bcrypt with salt
-- **Rate Limiting**: 100 requests per 15 minutes
-- **Helmet.js**: Security headers
-- **CORS**: Configured for frontend origin
-
-## 🎯 Architecture Highlights
-
-### Clean Architecture
-- **Controllers**: Handle HTTP requests/responses
-- **Services**: Contain business logic
-- **Models**: Define data structure and validation
-- **Utilities**: Reusable helper functions
-
-### Features Implemented
-
-✅ **JWT Authentication with Refresh Tokens**
-- Secure HttpOnly cookie storage
-- Automatic token refresh mechanism
-- Role-based access control
-
-✅ **Multi-Currency Transactions**
-- Real-time exchange rate fetching
-- Currency conversion with caching (1-hour TTL)
-- Support for 150+ currencies
-
-✅ **Budget Management**
-- Category-wise monthly limits
-- Automatic spending calculation
-- Smart notifications at 80% and 100%
-
-✅ **Recurring Transactions**
-- Cron job runs daily at midnight
-- Supports daily, weekly, monthly frequencies
-- Auto-creates transactions based on templates
-
-✅ **AI Integration**
-- Gemini API for financial coaching
-- Context-aware advice based on transaction history
-- Auto-categorization using LLM
-
-✅ **CSV/Excel Import**
-- Supports both CSV and XLSX formats
-- Flexible column name matching
-- Batch processing with error handling
-
-## 🧪 Testing the API
-
-### 1. Register a User
-```bash
-curl -X POST http://localhost:5000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "password123"
-  }'
-```
-
-### 2. Add a Transaction
-```bash
-curl -X POST http://localhost:5000/api/transactions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -d '{
-    "amount": 50.00,
-    "category": "Food & Dining",
-    "description": "Lunch at restaurant",
-    "type": "expense",
-    "date": "2024-01-15"
-  }'
-```
-
-### 3. Get Financial Advice
-```bash
-curl -X POST http://localhost:5000/api/ai/chat \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -d '{
-    "query": "How can I reduce my monthly expenses?"
-  }'
-```
-
-## 📝 Default Categories
-
-The system supports these default categories:
-- Food & Dining
-- Transportation
-- Shopping
-- Entertainment
-- Bills & Utilities
-- Healthcare
-- Education
-- Travel
-- Personal Care
-- Other (fallback)
-
-## 🔮 Future Enhancements
-
-- [ ] Complete React frontend implementation
-- [ ] PWA with offline support
-- [ ] Real-time notifications (Socket.io)
-- [ ] Export reports to PDF
-- [ ] Email notifications for budget alerts
-- [ ] Two-factor authentication
-- [ ] Social login (Google, GitHub)
-- [ ] Mobile app (React Native)
-
-## 📄 License
-
-MIT License - feel free to use this project for learning or your portfolio!
+### Dashboard & Reports
+- `GET /api/dashboard` - Get dashboard data
+- `POST /api/reports/send` - Send email report
 
 ## 🤝 Contributing
 
-This is a portfolio/internship project. Feedback and suggestions are welcome!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📧 Contact
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Created by [Your Name] - [your.email@example.com]
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Your Name**
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+
+## 🙏 Acknowledgments
+
+- Google Gemini AI for intelligent financial insights
+- Firebase for seamless authentication
+- MongoDB Atlas for reliable cloud database
+- Vercel for effortless deployment
+- The open-source community for amazing tools and libraries
+
+## 📧 Support
+
+For support, email your-email@example.com or open an issue in the repository.
 
 ---
 
-**Note**: This is an educational project demonstrating modern full-stack development practices suitable for a 2026 internship application.
+<div align="center">
+
+**Built with ❤️ using the MERN Stack**
+
+⭐ Star this repo if you find it helpful!
+
+</div>
