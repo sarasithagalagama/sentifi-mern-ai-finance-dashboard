@@ -172,7 +172,9 @@ const Dashboard = () => {
             <div className="card">
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--spacing-md)' }}>
                 <h3>Financial Graphs</h3>
-                <MoreHorizontal className="text-mute" />
+                <button className="btn-icon">
+                  <MoreHorizontal size={18} />
+                </button>
               </div>
               {expenseData.length > 0 ? (
                 <>
@@ -222,25 +224,43 @@ const Dashboard = () => {
             <div className="card">
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--spacing-md)' }}>
                 <h3>Income vs Expenses</h3>
-                <MoreHorizontal className="text-mute" />
+                <button className="btn-icon">
+                  <MoreHorizontal size={18} />
+                </button>
               </div>
-              <div style={{ height: 200 }}>
-                 <ResponsiveContainer width="100%" height="100%">
-                   <BarChart data={incomeVsExpense} barSize={40}>
-                     <XAxis dataKey="name" tick={{fill: '#888'}} axisLine={false} tickLine={false} />
-                     <Tooltip 
-                       contentStyle={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 8 }}
-                       itemStyle={{ color: 'var(--text-primary)' }}
-                     />
-                     <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                        {incomeVsExpense.map((entry: any, index: number) => (
-                          <Cell key={`cell-${index}`} fill={entry.fill} />
-                        ))}
-                     </Bar>
-                   </BarChart>
-                 </ResponsiveContainer>
-              </div>
-              {/* Optional footer summary */}
+                {incomeVsExpense.length > 0 ? (
+                  <>
+                    <div style={{ height: 200 }}>
+                       <ResponsiveContainer width="100%" height="100%">
+                         <BarChart data={incomeVsExpense} barSize={40}>
+                           <XAxis dataKey="name" tick={{fill: '#888'}} axisLine={false} tickLine={false} />
+                           <Tooltip 
+                             contentStyle={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 8 }}
+                             itemStyle={{ color: 'var(--text-primary)' }}
+                           />
+                           <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                              {incomeVsExpense.map((entry: any, index: number) => (
+                                <Cell key={`cell-${index}`} fill={entry.fill} />
+                              ))}
+                           </Bar>
+                         </BarChart>
+                       </ResponsiveContainer>
+                    </div>
+                    <div style={{ marginTop: 'var(--spacing-md)' }}>
+                      {incomeVsExpense.map((item: any) => (
+                        <div key={item.name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <div style={{ width: 8, height: 8, borderRadius: '50%', background: item.fill }} />
+                            <span className="text-small text-mute">{item.name}</span>
+                          </div>
+                          <span className="text-small" style={{ fontWeight: 600 }}>${Math.abs(item.value).toLocaleString()}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>No data available</div>
+                )}
             </div>
           </div>
         </div>
@@ -255,7 +275,9 @@ const Dashboard = () => {
                   <h3>Financial Goals</h3>
                   <span className="text-mute text-small">Stay on track</span>
                 </div>
-                <MoreHorizontal className="text-mute" />
+                <button className="btn-icon">
+                  <MoreHorizontal size={18} />
+                </button>
              </div>
              
              {goals.length > 0 ? (
@@ -299,7 +321,9 @@ const Dashboard = () => {
                   <h3>Upcoming Recurring</h3>
                   <span className="text-mute text-small">Never miss a payment</span>
                 </div>
-                <MoreHorizontal className="text-mute" />
+                <button className="btn-icon">
+                  <MoreHorizontal size={18} />
+                </button>
              </div>
 
              {upcomingBills.length > 0 ? (

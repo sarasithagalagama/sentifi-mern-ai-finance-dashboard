@@ -177,7 +177,7 @@ const Transactions = () => {
                   </span>
                 </td>
                 <td>
-                  <button style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                  <button className="btn-icon">
                     <MoreHorizontal size={18} />
                   </button>
                 </td>
